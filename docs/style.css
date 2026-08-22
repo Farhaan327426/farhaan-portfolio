@@ -237,9 +237,9 @@ ul {
 
 .hero-title {
     font-family: var(--font-sans);
-    font-size: clamp(2.8rem, 5.8vw, 4.8rem);
+    font-size: clamp(2.0rem, 4.5vw, 3.6rem);
     font-weight: 700;
-    line-height: 1.08;
+    line-height: 1.12;
     letter-spacing: -0.02em;
     color: var(--text-primary);
 }
@@ -865,23 +865,34 @@ ul {
     justify-content: flex-end;
 }
 
-/* Responsive */
+/* Responsive Cross-Platform Optimizations (Android, iOS, Windows, macOS) */
 @media (max-width: 900px) {
+    .shell {
+        padding: 0 1.25rem;
+    }
+    
+    .section-pad {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+    }
+
     .hero-grid {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2rem;
     }
 
     .portrait-placeholder {
-        max-width: 280px;
+        max-width: 240px;
+        margin: 0 auto;
     }
 
     .featured-card {
         grid-template-columns: 1fr;
+        padding: 1.5rem;
     }
 
-    .featured-card-image {
-        height: 160px;
+    .card-visual-preview {
+        height: 180px !important;
     }
 
     .capabilities-grid, .contact-grid-wrap {
@@ -895,5 +906,31 @@ ul {
 
     .principles {
         grid-column: 1 / -1;
+    }
+
+    .modal-card {
+        padding: 1.5rem;
+        max-height: 90vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2.1rem;
+        line-height: 1.15;
+    }
+    
+    .hero-kicker {
+        font-size: 0.78rem;
+        flex-wrap: wrap;
+    }
+
+    .portrait-placeholder {
+        max-width: 100%;
+    }
+    
+    .button-dark, .button {
+        width: 100%;
+        justify-content: center;
     }
 }
