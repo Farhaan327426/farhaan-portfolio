@@ -934,3 +934,341 @@ ul {
         justify-content: center;
     }
 }
+
+/* ==========================================================================
+   5. Portfolio Digital QR Suite & Smart Pass Interfaces
+   ========================================================================== */
+
+/* Keyframe Animations */
+@keyframes laserSweep {
+    0% { top: 0%; opacity: 0.8; }
+    50% { top: 96%; opacity: 1; }
+    100% { top: 0%; opacity: 0.8; }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Header QR Share Button */
+.qr-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid var(--border-strong);
+    color: var(--text-primary);
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.qr-share-btn svg {
+    stroke: currentColor;
+}
+
+.qr-share-btn:hover {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
+    transform: translateY(-1px);
+}
+
+/* Portfolio QR Suite Modal */
+.portfolio-qr-card-modal {
+    max-width: 540px !important;
+    text-align: center;
+}
+
+.portfolio-qr-card-modal .modal-header {
+    margin-bottom: 1.2rem;
+}
+
+.portfolio-qr-card-modal .modal-title {
+    font-size: 1.5rem;
+}
+
+.p-qr-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+.p-qr-nav-strip {
+    display: flex;
+    gap: 0.4rem;
+    background: var(--bg-secondary);
+    padding: 4px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 480px;
+    overflow-x: auto;
+}
+
+.p-qr-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.p-qr-tab:hover {
+    color: var(--text-primary);
+}
+
+.p-qr-tab.active {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.p-qr-frame-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
+}
+
+.p-qr-frame {
+    width: 230px;
+    height: 230px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-strong);
+    border-radius: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: var(--transition);
+}
+
+.p-qr-frame::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #10B981, transparent);
+    box-shadow: 0 0 8px #10B981;
+    animation: laserSweep 2.5s ease-in-out infinite;
+}
+
+.p-qr-frame svg {
+    width: 100%;
+    height: 100%;
+}
+
+.p-qr-actions-row {
+    display: flex;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 360px;
+    justify-content: center;
+}
+
+.p-qr-actions-row .button {
+    flex: 1;
+    justify-content: center;
+    font-size: 0.82rem;
+    padding: 0.6rem 1rem;
+}
+
+/* Smart Contact QR Pass Widget (Contact Section) */
+.smart-contact-qr-card {
+    margin-top: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 12px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: var(--transition);
+}
+
+.smart-contact-qr-card:hover {
+    border-color: #10B981;
+    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.08);
+}
+
+.qr-card-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.banner-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pulse-indicator {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #10B981;
+    display: inline-block;
+    animation: pulseGlow 1.8s infinite;
+}
+
+.banner-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+}
+
+.banner-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.12);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.contact-qr-tab-strip {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.9rem;
+    background: var(--bg-secondary);
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.c-qr-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.c-qr-tab:hover {
+    color: var(--text-primary);
+}
+
+.c-qr-tab.active {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.contact-qr-body {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.contact-qr-code-box {
+    width: 115px;
+    height: 115px;
+    min-width: 115px;
+    border-radius: 8px;
+    background: #09090B;
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 6px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.contact-qr-code-box svg {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.contact-qr-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.c-qr-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.c-qr-title {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.c-qr-hint {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0.2rem 0;
+}
+
+.c-qr-btn-row {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+}
+
+.btn-qr-action {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.4rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-qr-action:hover {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border-color: var(--button-bg);
+}
+
+@media (max-width: 768px) {
+    .contact-qr-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .contact-qr-code-box {
+        margin: 0 auto;
+    }
+}

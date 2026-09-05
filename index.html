@@ -41,6 +41,10 @@
             </nav>
 
             <div class="header-right-actions">
+                <button class="qr-share-btn" id="qrShareBtn" aria-label="Scan Portfolio on Mobile or Save Digital Pass" title="Scan Portfolio on Mobile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                    <span>Scan Pass</span>
+                </button>
                 <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Theme">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-icon"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
                     <span class="theme-label" id="themeLabel">Light</span>
@@ -174,15 +178,7 @@
                     <div class="featured-card-image">
                         <span class="image-label">Case study / Smart Ticketing</span>
                         <div class="card-visual-preview preview-ticketing" style="position: relative; overflow: hidden; border-radius: 12px; height: 220px; background: linear-gradient(135deg, #18181B 0%, #27272A 100%); display: flex; align-items: center; justify-content: center;">
-                            <img src="smart-ticketing.jpg" alt="Smart Booking & QR Ticketing Engine" class="card-img" onerror="this.onerror=null; this.src='smart-ticketing.png';" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 5;" />
-                            <!-- Custom SVG QR Ticket Illustration -->
-                            <svg width="100%" height="100%" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; inset: 0;">
-                                <rect x="140" y="30" width="120" height="160" rx="10" fill="#09090B" stroke="#3F3F46" stroke-width="2" />
-                                <rect x="160" y="55" width="80" height="80" rx="4" fill="#FAFAFA" />
-                                <path d="M170 65h20v20h-20zM210 65h20v20h-20zM170 105h20v20h-20z" fill="#09090B" />
-                                <rect x="155" y="150" width="90" height="24" rx="12" fill="#10B981" />
-                                <text x="168" y="166" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="bold">✓ TICKET PASS</text>
-                            </svg>
+                            <img src="smart-ticketing.jpg" alt="Smart Booking & QR Ticketing Engine" class="card-img" style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 5;" />
                             <span class="visual-badge" style="position: absolute; top: 12px; right: 12px; z-index: 6; background: rgba(24, 24, 27, 0.85); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); padding: 4px 8px; border-radius: 6px; font-family: monospace; font-size: 11px;">HMAC SHA-256</span>
                         </div>
                     </div>
@@ -363,6 +359,38 @@
                         </div>
                     </div>
 
+                    <!-- SMART DIGITAL IDENTITY / PORTFOLIO QR PASS -->
+                    <div class="smart-contact-qr-card">
+                        <div class="qr-card-banner">
+                            <div class="banner-title-wrap">
+                                <span class="pulse-indicator"></span>
+                                <span class="banner-title">FARHAAN BASHIR · DIGITAL PASS</span>
+                            </div>
+                            <span class="banner-badge">PORTFOLIO QR</span>
+                        </div>
+                        
+                        <div class="contact-qr-tab-strip">
+                            <button type="button" class="c-qr-tab active" data-qrmode="vcard">📱 vCard Pass</button>
+                            <button type="button" class="c-qr-tab" data-qrmode="portfolio">🌐 Mobile Link</button>
+                            <button type="button" class="c-qr-tab" data-qrmode="whatsapp">💬 WhatsApp</button>
+                        </div>
+
+                        <div class="contact-qr-body">
+                            <div class="contact-qr-code-box" id="contactQrOutput">
+                                <!-- Generated SVG QR -->
+                            </div>
+                            <div class="contact-qr-details">
+                                <div class="c-qr-name">Farhaan Bashir</div>
+                                <div class="c-qr-title">Founder &amp; Lead Engineer, SAFARapp</div>
+                                <div class="c-qr-hint" id="contactQrHint">Scan with your smartphone to instantly save Farhaan Bashir into contacts.</div>
+                                <div class="c-qr-btn-row">
+                                    <button type="button" class="btn-qr-action" id="btnDownloadContactQr">Download QR ⤓</button>
+                                    <button type="button" class="btn-qr-action" id="btnCopyVCard">Copy Data 📋</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="social-links-bar">
                         <a href="https://github.com" target="_blank" rel="noopener" class="soc-link">GitHub ↗</a>
                         <a href="https://linkedin.com" target="_blank" rel="noopener" class="soc-link">LinkedIn ↗</a>
@@ -432,7 +460,43 @@
         </div>
     </div>
 
-    <!-- Application Script -->
+    <!-- Dedicated Portfolio Digital QR Suite Modal -->
+    <div class="modal-overlay" id="portfolioQrModal" aria-hidden="true" role="dialog">
+        <div class="modal-card portfolio-qr-card-modal">
+            <button class="modal-close" id="portfolioQrClose" aria-label="Close Portfolio QR Modal">✕</button>
+            <div class="modal-header">
+                <span class="modal-tag">PORTFOLIO SHARING &amp; DIGITAL IDENTITY</span>
+                <h3 class="modal-title" id="pQrTitle">Scan to Open Portfolio on Mobile</h3>
+                <p class="modal-desc" id="pQrDesc" style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.3rem;">Point your smartphone camera at the QR code to seamlessly browse Farhaan Bashir’s portfolio on your phone.</p>
+            </div>
+            
+            <div class="p-qr-modal-body">
+                <div class="p-qr-nav-strip">
+                    <button type="button" class="p-qr-tab active" data-mode="mobile">📱 Open on Mobile</button>
+                    <button type="button" class="p-qr-tab" data-mode="vcard">💼 Save vCard Pass</button>
+                    <button type="button" class="p-qr-tab" data-mode="whatsapp">💬 WhatsApp</button>
+                    <button type="button" class="p-qr-tab" data-mode="github">🐙 GitHub</button>
+                </div>
+
+                <div class="p-qr-frame-wrap">
+                    <div class="p-qr-frame" id="portfolioQrContainer">
+                        <!-- Live vector QR generated here -->
+                    </div>
+                    <div class="p-qr-actions-row">
+                        <button type="button" class="button button-dark" id="btnCopyPortfolioLink">Copy Portfolio Link 🔗</button>
+                        <button type="button" class="btn-qr-action" id="btnDownloadPortfolioPass">Download Badge ⤓</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer" style="margin-top: 1.5rem;">
+                <button class="button button-dark" id="portfolioQrDismiss">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Scripts -->
+    <script src="qr-engine.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

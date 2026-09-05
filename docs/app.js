@@ -1,5 +1,5 @@
 /**
- * Farhaan Bashir Portfolio — Application Logic
+ * Farhaan Bashir Portfolio — Application Logic & Portfolio Digital QR Suite
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollSpy();
     initCaseStudyModals();
     initContactForm();
+    initPortfolioQRModal();
+    initContactQRWidget();
 });
 
 /* ==========================================================================
@@ -25,6 +27,8 @@ function initThemeToggle() {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
             setTheme(newTheme);
+            // Re-render QR with theme colors if modal or widget is active
+            if (window.updateActiveQR) window.updateActiveQR();
         });
     }
 
@@ -71,7 +75,7 @@ function initScrollSpy() {
 }
 
 /* ==========================================================================
-   3. Case Study Detail Modal
+   3. Case Study Detail Modal Data & Logic
    ========================================================================== */
 const caseStudyData = {
     '1': {
@@ -101,24 +105,36 @@ const caseStudyData = {
     },
     '2': {
         tag: 'CASE STUDY · CONTACTLESS CRYPTOGRAPHY',
-        title: 'Smart Booking & QR Ticketing',
+        title: 'Smart Booking & Offline QR Ticketing',
         body: `
-            <p><strong>Overview:</strong> A cryptographically secured offline ticket reservation engine designed to prevent double-booking and enable instant QR conductor validation even in zero-connectivity areas.</p>
+            <p><strong>Overview:</strong> Built for SAFARapp, this offline-first reservation engine prevents double-booking and enables instant conductor validation across Jammu & Kashmir transit corridors where cellular networks frequently drop.</p>
             
             <h4 style="font-weight:700; color:var(--text-primary); margin-top:1rem;">KEY ARCHITECTURE HIGHLIGHTS:</h4>
             <ul style="padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem;">
-                <li><strong>HMAC SHA-256 Signed QR Code:</strong> Contains passenger ID, route segment, timestamp, and verifiable digital signature readable without cellular internet.</li>
-                <li><strong>Atomic DB Transactions:</strong> PostgreSQL row-level locks prevent seat contention during peak commute hours.</li>
+                <li><strong>HMAC SHA-256 Offline Signed QR:</strong> Tickets encode passenger identifiers, route segment IDs, and an HMAC signature verifiable by conductors in under 1 millisecond with zero cellular connection.</li>
+                <li><strong>Atomic DB Transactions:</strong> PostgreSQL row-level locks prevent seat race conditions during peak morning valley departures.</li>
+                <li><strong>Anti-Replay Salt & Expiry Windows:</strong> Rolling timestamp nonces prevent ticket reuse and screenshot forwarding fraud.</li>
             </ul>
 
-            <h4 style="font-weight:700; color:var(--text-primary); margin-top:1rem;">TICKET PAYLOAD SCHEMATIC:</h4>
+            <h4 style="font-weight:700; color:var(--text-primary); margin-top:1rem;">CRYPTOGRAPHIC VERIFICATION PIPELINE:</h4>
+            <div class="modal-code-block">
+[ Commuter Booking App ] ──► [ PostgreSQL Atomic Lock ]
+                                        │
+                                        ▼
+[ HMAC SHA-256 Signer ] ────► [ Scannable Offline QR Pass ]
+                                        │
+                                        ▼
+[ Conductor Offline Reader ] ─► [ Local Key Ring Check (<0.4ms) ] ──► [ Validated / Gate Open ]
+            </div>
+
+            <h4 style="font-weight:700; color:var(--text-primary); margin-top:1rem;">CANONICAL TICKET SCHEMA:</h4>
             <div class="modal-code-block">
 {
   "ticket_id": "SAFAR-JK-90821",
   "passenger": "Farhaan Bashir",
   "route": "Srinagar TRC -> Baramulla Main",
-  "timestamp": 1787384900,
-  "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  "issued_at": 1787384900,
+  "signature": "cead2d56683cd1ecd515cf7a9ec18451d395a9fd2cd8375649e90e770802a47e"
 }
             </div>
         `
@@ -205,7 +221,269 @@ function initCaseStudyModals() {
 }
 
 /* ==========================================================================
-   4. Contact Form Validation & Submission
+   4. Portfolio Digital QR Suite (Modal & Sharing)
+   ========================================================================== */
+function initPortfolioQRModal() {
+    if (typeof QRCodeEngine === 'undefined') return;
+
+    const qrShareBtn = document.getElementById('qrShareBtn');
+    const portfolioQrModal = document.getElementById('portfolioQrModal');
+    const pModalClose = document.getElementById('portfolioQrClose');
+    const pModalDismiss = document.getElementById('portfolioQrDismiss');
+    const qrContainer = document.getElementById('portfolioQrContainer');
+    const qrTabs = document.querySelectorAll('.p-qr-tab');
+    const qrTitle = document.getElementById('pQrTitle');
+    const qrDesc = document.getElementById('pQrDesc');
+    const btnCopyLink = document.getElementById('btnCopyPortfolioLink');
+    const btnDownloadPass = document.getElementById('btnDownloadPortfolioPass');
+
+    if (!portfolioQrModal || !qrContainer) return;
+
+    const portfolioUrl = window.location.origin && window.location.origin !== 'null'
+        ? window.location.href.split('#')[0]
+        : 'https://farhaan327426.github.io/farhaan-portfolio/';
+
+    const vCardPayload = QRCodeEngine.createVCard({
+        firstName: 'Farhaan',
+        lastName: 'Bashir',
+        org: 'SAFARapp Mobility & Transit Systems',
+        title: 'Founder & Lead Engineer',
+        phone: '+916006048125',
+        email: 'farhanbashir327426@gmail.com',
+        url: portfolioUrl,
+        note: 'Engineering real-time transit telemetry, route optimization, & distributed systems.'
+    });
+
+    const qrModes = {
+        'mobile': {
+            title: 'Scan to Open Portfolio on Mobile',
+            desc: 'Point your smartphone camera at the QR code to seamlessly browse Farhaan Bashir’s portfolio on your phone.',
+            payload: portfolioUrl,
+            filename: 'farhaan-bashir-portfolio-qr.png',
+            copyText: portfolioUrl,
+            copyLabel: 'Copy Portfolio Link 🔗'
+        },
+        'vcard': {
+            title: 'Save Farhaan Bashir’s Digital Pass',
+            desc: 'Point your camera to instantly add Farhaan Bashir (Founder & Lead Engineer, SAFARapp) to your phone contacts.',
+            payload: vCardPayload,
+            filename: 'farhaan-bashir-vcard-pass.png',
+            copyText: vCardPayload,
+            copyLabel: 'Copy vCard Data 📋'
+        },
+        'whatsapp': {
+            title: 'Chat with Farhaan on WhatsApp',
+            desc: 'Scan to immediately launch a direct WhatsApp conversation with Farhaan (+91 6006048125).',
+            payload: 'https://wa.me/916006048125?text=Hi%20Farhaan,%20I%20am%20reviewing%20your%20portfolio!',
+            filename: 'farhaan-bashir-whatsapp-qr.png',
+            copyText: 'https://wa.me/916006048125',
+            copyLabel: 'Copy WhatsApp Link 💬'
+        },
+        'github': {
+            title: 'Farhaan’s GitHub Profile',
+            desc: 'Scan to explore Farhaan’s repositories, architecture proofs-of-concept, and production code.',
+            payload: 'https://github.com/Farhaan327426',
+            filename: 'farhaan-bashir-github-qr.png',
+            copyText: 'https://github.com/Farhaan327426',
+            copyLabel: 'Copy GitHub Link 🐙'
+        }
+    };
+
+    let activeMode = 'mobile';
+
+    function renderModalQR() {
+        const item = qrModes[activeMode];
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+        const svg = QRCodeEngine.generateSVG(item.payload, {
+            size: 210,
+            colorDark: '#10B981',
+            colorLight: isDark ? '#141416' : '#FAF8F3',
+            rounded: true,
+            cornerGlow: true
+        });
+
+        qrContainer.innerHTML = svg;
+        if (qrTitle) qrTitle.textContent = item.title;
+        if (qrDesc) qrDesc.textContent = item.desc;
+        if (btnCopyLink) btnCopyLink.textContent = item.copyLabel;
+    }
+
+    window.updateActiveQR = renderModalQR;
+
+    qrTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            qrTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            activeMode = tab.getAttribute('data-mode') || 'mobile';
+            renderModalQR();
+        });
+    });
+
+    function openModal() {
+        renderModalQR();
+        portfolioQrModal.classList.add('active');
+        portfolioQrModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        portfolioQrModal.classList.remove('active');
+        portfolioQrModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    if (qrShareBtn) qrShareBtn.addEventListener('click', openModal);
+    if (pModalClose) pModalClose.addEventListener('click', closeModal);
+    if (pModalDismiss) pModalDismiss.addEventListener('click', closeModal);
+
+    portfolioQrModal.addEventListener('click', (e) => {
+        if (e.target === portfolioQrModal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && portfolioQrModal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    if (btnCopyLink) {
+        btnCopyLink.addEventListener('click', () => {
+            const item = qrModes[activeMode];
+            navigator.clipboard.writeText(item.copyText).then(() => {
+                const prev = btnCopyLink.textContent;
+                btnCopyLink.textContent = 'Copied to Clipboard! ✓';
+                setTimeout(() => { btnCopyLink.textContent = prev; }, 2000);
+            });
+        });
+    }
+
+    if (btnDownloadPass) {
+        btnDownloadPass.addEventListener('click', () => {
+            const item = qrModes[activeMode];
+            const canvas = document.createElement('canvas');
+            QRCodeEngine.renderToCanvas(canvas, item.payload, {
+                size: 400,
+                colorDark: '#0E1116',
+                colorLight: '#FFFFFF',
+                margin: 2
+            });
+
+            const link = document.createElement('a');
+            link.download = item.filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+}
+
+/* ==========================================================================
+   5. Contact Section Smart Digital QR Widget
+   ========================================================================== */
+function initContactQRWidget() {
+    if (typeof QRCodeEngine === 'undefined') return;
+
+    const qrContainer = document.getElementById('contactQrOutput');
+    const qrTabs = document.querySelectorAll('.c-qr-tab');
+    const qrHint = document.getElementById('contactQrHint');
+    const btnDownload = document.getElementById('btnDownloadContactQr');
+    const btnCopyVCard = document.getElementById('btnCopyVCard');
+
+    if (!qrContainer) return;
+
+    let currentMode = 'vcard';
+
+    const portfolioUrl = window.location.origin && window.location.origin !== 'null'
+        ? window.location.href.split('#')[0]
+        : 'https://farhaan327426.github.io/farhaan-portfolio/';
+
+    const vCardData = QRCodeEngine.createVCard({
+        firstName: 'Farhaan',
+        lastName: 'Bashir',
+        org: 'SAFARapp Mobility & Transit Systems',
+        title: 'Founder & Lead Engineer',
+        phone: '+916006048125',
+        email: 'farhanbashir327426@gmail.com',
+        url: portfolioUrl,
+        note: 'Engineering real-time transit telemetry, route optimization, & offline cryptography.'
+    });
+
+    const modes = {
+        'vcard': {
+            payload: vCardData,
+            hint: 'Scan with smartphone camera to instantly save Farhaan Bashir into your contacts.',
+            filename: 'farhaan-bashir-vcard.png'
+        },
+        'portfolio': {
+            payload: portfolioUrl,
+            hint: 'Scan to open this portfolio directly on your mobile device.',
+            filename: 'farhaan-bashir-portfolio.png'
+        },
+        'whatsapp': {
+            payload: 'https://wa.me/916006048125?text=Hi%20Farhaan,%20I%20saw%20your%20portfolio!',
+            hint: 'Scan to start an instant WhatsApp conversation with Farhaan (+91 6006048125).',
+            filename: 'farhaan-bashir-whatsapp.png'
+        }
+    };
+
+    function renderWidgetQR() {
+        const item = modes[currentMode];
+        const svg = QRCodeEngine.generateSVG(item.payload, {
+            size: 115,
+            colorDark: '#10B981',
+            colorLight: '#09090B',
+            rounded: true,
+            cornerGlow: true
+        });
+
+        qrContainer.innerHTML = svg;
+        if (qrHint) qrHint.textContent = item.hint;
+    }
+
+    qrTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            qrTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentMode = tab.getAttribute('data-qrmode') || 'vcard';
+            renderWidgetQR();
+        });
+    });
+
+    if (btnDownload) {
+        btnDownload.addEventListener('click', () => {
+            const item = modes[currentMode];
+            const canvas = document.createElement('canvas');
+            QRCodeEngine.renderToCanvas(canvas, item.payload, {
+                size: 320,
+                colorDark: '#0D0F12',
+                colorLight: '#FFFFFF',
+                margin: 2
+            });
+
+            const link = document.createElement('a');
+            link.download = item.filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    }
+
+    if (btnCopyVCard) {
+        btnCopyVCard.addEventListener('click', () => {
+            const item = modes[currentMode];
+            navigator.clipboard.writeText(item.payload).then(() => {
+                const prev = btnCopyVCard.innerHTML;
+                btnCopyVCard.innerHTML = `Copied! ✓`;
+                setTimeout(() => { btnCopyVCard.innerHTML = prev; }, 2000);
+            });
+        });
+    }
+
+    // Initial render
+    renderWidgetQR();
+}
+
+/* ==========================================================================
+   6. Contact Form Validation & Submission
    ========================================================================== */
 function initContactForm() {
     const form = document.getElementById('contactForm');
