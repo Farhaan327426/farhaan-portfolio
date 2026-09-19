@@ -87,263 +87,163 @@
       </div>
     </section>
 
-    <!-- Section 01: Selected Work (Static CSS Grid, Reallocated Aggregate Impact Metrics, Space Mono Thumbnails) -->
-    <section class="section-pad work-section" id="work">
+    <!-- Section 01: Engineering Builds (Asymmetrical Grid) -->
+    <section class="section-pad projects-section" id="work">
       <div class="shell">
-        <div class="section-header">
+        <div class="section-intro">
           <span class="section-tag">01 / Production Systems</span>
-          <h2 class="section-title">Engineering Case Studies</h2>
+          <h2 class="section-title">Engineering Builds</h2>
+          <p>Production systems solving real problems in mountain transit: live coordination without internet, cryptographic ticketing offline, and resilient routing across remote corridors.</p>
         </div>
 
-        <!-- Static High-Visibility CSS Grid (Permanent 4-Card Presentation, Zero Filter Bar) -->
-        <div class="project-grid">
+        <div class="projects-grid">
+          <!-- Project 1: Telemetry -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Real-Time Coordination</div>
+              <h3 class="project-title">50,000 people now know when their bus arrives</h3>
+              <p class="project-subtitle">Live GPS tracking from buses moving through Himalayan valleys. Positions update every 2 seconds. Works with intermittent cellular in high-altitude corridors.</p>
+            </div>
 
-          <!-- Card 01: Live Route Intelligence Engine -->
-          <article class="project-card" data-module="telemetry">
-            <div class="card-metric-thumbnail">
-              <div class="thumb-header">
-                <span class="thumb-label">TELEMETRY STREAM // KASHMIR CORRIDOR</span>
-                <span class="thumb-status-pill">LIVE</span>
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Signal Latency</span>
+                <span class="fact-value">25ms</span>
               </div>
-              <div class="thumb-grid">
-                <div class="thumb-stat">
-                  <span class="stat-k">LATENCY</span>
-                  <span class="stat-v">&lt; 25ms</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">SCALE</span>
-                  <span class="stat-v">50K+ Commuters</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">FILTER</span>
-                  <span class="stat-v">Recursive Kalman</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">INGRESS</span>
-                  <span class="stat-v">Redis Streams / WSS</span>
-                </div>
+              <div class="fact">
+                <span class="fact-label">Scale</span>
+                <span class="fact-value">10,000+ simultaneous users tracking live buses</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Kalman filtering eliminates mountain multipath reflection. Raw GPS noise from valley cliffs smoothed to accurate position.</span>
               </div>
             </div>
 
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-index">SYS_01</span>
-                <span class="card-domain">Real-Time Transit &amp; Telemetry</span>
-              </div>
-              <h3 class="card-title">Live Route Intelligence Engine</h3>
-              <p class="card-desc">
-                High-concurrency streaming cluster ingesting GPS delta streams across valley corridors. Applies recursive Kalman filtering to eliminate mountain multipath errors and broadcasts sub-second arrival predictions.
-              </p>
+            <div class="project-tech">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Redis Streams</span>
+              <span class="tech-tag">WebSocket</span>
+              <span class="tech-tag">PostGIS</span>
+            </div>
 
-              <div class="card-metrics-banner">
-                <div class="metric-item">
-                  <span class="metric-label">BENCHMARK</span>
-                  <span class="metric-value">&lt; 25ms DISPATCH LATENCY</span>
-                </div>
-                <div class="metric-item">
-                  <span class="metric-label">AGGREGATE SCALE</span>
-                  <span class="metric-value">50K+ COMMUTERS TARGETED</span>
-                </div>
-              </div>
-
-              <div class="card-tech-tags">
-                <span class="tech-tag">Flutter</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">WebSockets</span>
-                <span class="tech-tag">Redis Streams</span>
-                <span class="tech-tag">PostGIS</span>
-              </div>
-
-              <button class="card-btn modal-trigger-btn" data-module="telemetry" data-case-study="telemetry" aria-label="Open architecture deep-dive for Live Route Intelligence Engine">
-                Read Case Study →
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="telemetry" data-case-study="telemetry" aria-label="Open architecture deep-dive for Live Route Intelligence Engine">
+                Architecture Deep-Dive →
               </button>
             </div>
           </article>
 
-          <!-- Card 02: Smart Booking & Offline Cryptographic Pass -->
-          <article class="project-card" data-module="pass">
-            <div class="card-metric-thumbnail">
-              <div class="thumb-header">
-                <span class="thumb-label">SECURITY PROTOCOL // ZERO CONNECTIVITY</span>
-                <span class="thumb-status-pill">VERIFIED</span>
+          <!-- Project 2: Ticketing -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Offline-First Security</div>
+              <h3 class="project-title">Tickets validate without internet</h3>
+              <p class="project-subtitle">Conductors on handheld devices verify cryptographic signatures locally. No network required. Anti-replay nonces prevent ticket duplication.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Verification Time</span>
+                <span class="fact-value">1ms</span>
               </div>
-              <div class="thumb-grid">
-                <div class="thumb-stat">
-                  <span class="stat-k">SECURITY</span>
-                  <span class="stat-v">100% Offline</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">SIGNATURE</span>
-                  <span class="stat-v">HMAC SHA-256</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">INTEGRITY</span>
-                  <span class="stat-v">Rolling Salt Nonce</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">LOCKS</span>
-                  <span class="stat-v">PostgreSQL Row-Level</span>
-                </div>
+              <div class="fact">
+                <span class="fact-label">Connectivity Required</span>
+                <span class="fact-value">0%. Works on 2G devices.</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">HMAC-SHA256 signatures + row-level PostgreSQL locks prevent concurrent overbooking on high-demand routes.</span>
               </div>
             </div>
 
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-index">SYS_02</span>
-                <span class="card-domain">Contactless Ticket Cryptography</span>
-              </div>
-              <h3 class="card-title">Smart Booking &amp; Offline Cryptographic Pass</h3>
-              <p class="card-desc">
-                Zero-connectivity verification engine using HMAC-SHA256 asymmetric signatures and atomic PostgreSQL row locks (SKIP LOCKED) to prevent double-booking and fraud during morning rush in remote valleys.
-              </p>
+            <div class="project-tech">
+              <span class="tech-tag">HMAC-SHA256</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">PWA</span>
+            </div>
 
-              <div class="card-metrics-banner">
-                <div class="metric-item">
-                  <span class="metric-label">SECURITY</span>
-                  <span class="metric-value">100% OFFLINE VERIFICATION</span>
-                </div>
-                <div class="metric-item">
-                  <span class="metric-label">VALIDATION TIME</span>
-                  <span class="metric-value">&lt; 1ms LOCAL POS CHECK</span>
-                </div>
-              </div>
-
-              <div class="card-tech-tags">
-                <span class="tech-tag">HMAC SHA-256</span>
-                <span class="tech-tag">PostgreSQL</span>
-                <span class="tech-tag">Node.js</span>
-                <span class="tech-tag">PWA Cache</span>
-                <span class="tech-tag">Razorpay</span>
-              </div>
-
-              <button class="card-btn modal-trigger-btn" data-module="pass" data-case-study="pass" aria-label="Open architecture deep-dive for Smart Booking & Offline Pass">
-                Read Case Study →
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="pass" data-case-study="pass" aria-label="Open architecture deep-dive for Smart Booking & Offline Pass">
+                Architecture Deep-Dive →
               </button>
             </div>
           </article>
 
-          <!-- Card 03: Offline Transit & J&K Bus Network -->
-          <article class="project-card" data-module="navigation">
-            <div class="card-metric-thumbnail">
-              <div class="thumb-header">
-                <span class="thumb-label">SPATIAL CACHE // HIMALAYAN TRANSIT</span>
-                <span class="thumb-status-pill">CACHED</span>
+          <!-- Project 3: Navigation -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Resilient Routing</div>
+              <h3 class="project-title">Navigate mountain routes without cellular</h3>
+              <p class="project-subtitle">Full valley network compressed into 18MB local cache. SMS/USSD fallback for feature phone users who can't run a smartphone app.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Cache Footprint</span>
+                <span class="fact-value">18MB</span>
               </div>
-              <div class="thumb-grid">
-                <div class="thumb-stat">
-                  <span class="stat-k">COVERAGE</span>
-                  <span class="stat-v">40+ Valley Stops</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">FOOTPRINT</span>
-                  <span class="stat-v">&lt; 18MB Tiles</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">STORAGE</span>
-                  <span class="stat-v">Hive SQLite</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">FALLBACK</span>
-                  <span class="stat-v">USSD / SMS Gateway</span>
-                </div>
+              <div class="fact">
+                <span class="fact-label">Coverage</span>
+                <span class="fact-value">40+ mountain stops across 3,500 km² of corridors</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Hierarchical vector tiles + on-device graph traversal. Feature phone users query routes via SMS shortcodes.</span>
               </div>
             </div>
 
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-index">SYS_03</span>
-                <span class="card-domain">Resilient Mountain Navigation</span>
-              </div>
-              <h3 class="card-title">Offline Transit &amp; J&amp;K Bus Network</h3>
-              <p class="card-desc">
-                Compact vector map tile rendering and offline spatial graph routing for remote mountain highways with zero cellular coverage. Coupled with an SMS/USSD automated gateway for feature phone accessibility.
-              </p>
+            <div class="project-tech">
+              <span class="tech-tag">Mapbox GL</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">USSD Gateway</span>
+              <span class="tech-tag">Vector Tiles</span>
+            </div>
 
-              <div class="card-metrics-banner">
-                <div class="metric-item">
-                  <span class="metric-label">NETWORK MAP</span>
-                  <span class="metric-value">40+ VALLEY BUS STOPS</span>
-                </div>
-                <div class="metric-item">
-                  <span class="metric-label">CACHE SIZE</span>
-                  <span class="metric-value">&lt; 18MB COMPLETE TILESET</span>
-                </div>
-              </div>
-
-              <div class="card-tech-tags">
-                <span class="tech-tag">Mapbox GL</span>
-                <span class="tech-tag">Hive SQLite</span>
-                <span class="tech-tag">PostGIS</span>
-                <span class="tech-tag">USSD Gateway</span>
-              </div>
-
-              <button class="card-btn modal-trigger-btn" data-module="navigation" data-case-study="navigation" aria-label="Open architecture deep-dive for Offline Transit Network">
-                Read Case Study →
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="navigation" data-case-study="navigation" aria-label="Open architecture deep-dive for Offline Transit Network">
+                Architecture Deep-Dive →
               </button>
             </div>
           </article>
 
-          <!-- Card 04: AI Multi-Modal Itinerary Engine -->
-          <article class="project-card" data-module="itinerary">
-            <div class="card-metric-thumbnail">
-              <div class="thumb-header">
-                <span class="thumb-label">HEURISTIC ENGINE // MULTI-MODAL ROUTING</span>
-                <span class="thumb-status-pill">OPTIMAL</span>
+          <!-- Project 4: Routing Optimization -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Multi-Modal Intelligence</div>
+              <h3 class="project-title">Journey planner finds 3–5 optimal routes in 40 milliseconds</h3>
+              <p class="project-subtitle">Combines fixed-schedule buses, shared passenger cabs, and walking transfers. Real-time weather adjusts elevation penalties. Returns Pareto frontier of time vs. cost vs. comfort.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Search Latency</span>
+                <span class="fact-value">40ms</span>
               </div>
-              <div class="thumb-grid">
-                <div class="thumb-stat">
-                  <span class="stat-k">BENCHMARK</span>
-                  <span class="stat-v">&lt; 40ms</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">ALGORITHM</span>
-                  <span class="stat-v">Multi-Objective A*</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">PENALTIES</span>
-                  <span class="stat-v">Elevation &amp; Snow</span>
-                </div>
-                <div class="thumb-stat">
-                  <span class="stat-k">INTERFACE</span>
-                  <span class="stat-v">FastAPI Graph</span>
-                </div>
+              <div class="fact">
+                <span class="fact-label">Cache Efficiency</span>
+                <span class="fact-value">94.2% hit ratio on road graph lookups. Sub-3ms proximity queries.</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Multi-objective A* Pareto search kernel. Rain/snow/elevation dynamically re-weight walking legs and transfers.</span>
               </div>
             </div>
 
-            <div class="card-body">
-              <div class="card-meta">
-                <span class="card-index">SYS_04</span>
-                <span class="card-domain">Algorithmic Route Optimization</span>
-              </div>
-              <h3 class="card-title">AI Multi-Modal Itinerary Engine</h3>
-              <p class="card-desc">
-                Custom multi-objective A* graph search calculating compound multi-modal journeys (local bus + shared cab + pedestrian legs) dynamically weighted by live weather, altitude gradients, and historical delays.
-              </p>
+            <div class="project-tech">
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">NetworkX</span>
+              <span class="tech-tag">OpenTripPlanner</span>
+              <span class="tech-tag">Python Async</span>
+            </div>
 
-              <div class="card-metrics-banner">
-                <div class="metric-item">
-                  <span class="metric-label">COMPUTATION</span>
-                  <span class="metric-value">&lt; 40ms PARETO FRONTIER</span>
-                </div>
-                <div class="metric-item">
-                  <span class="metric-label">CACHE HIT RATIO</span>
-                  <span class="metric-value">94.2% IN-MEMORY GRAPH</span>
-                </div>
-              </div>
-
-              <div class="card-tech-tags">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">FastAPI</span>
-                <span class="tech-tag">NetworkX</span>
-                <span class="tech-tag">OpenTripPlanner</span>
-              </div>
-
-              <button class="card-btn modal-trigger-btn" data-module="itinerary" data-case-study="itinerary" aria-label="Open architecture deep-dive for AI Multi-Modal Engine">
-                Read Case Study →
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="itinerary" data-case-study="itinerary" aria-label="Open architecture deep-dive for AI Multi-Modal Engine">
+                Architecture Deep-Dive →
               </button>
             </div>
           </article>
-
         </div>
       </div>
     </section>

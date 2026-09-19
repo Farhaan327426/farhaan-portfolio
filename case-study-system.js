@@ -248,7 +248,7 @@ const CaseStudySystem = {
 
   attachEventListeners() {
     document.addEventListener("click", (e) => {
-      const btn = e.target.closest(".modal-trigger-btn, [data-case-study]");
+      const btn = e.target.closest(".modal-trigger-btn, [data-case-study], .project-link");
       if (btn) {
         e.preventDefault();
         const moduleId = btn.getAttribute("data-module") || btn.getAttribute("data-case-study");
