@@ -1,10 +1,9 @@
 /**
  * FARHAAN BASHIR — PORTFOLIO CORE ENGINE
- * Typographic System: Newsreader + Space Mono
- * Architecture: Static 4-System Grid + Deep-Dive Architecture Case Studies
+ * Visual System: High-Contrast Monospaced Engineering / Editorial Hybrid
+ * Architecture: Modular State-Driven DOM Engines & Micro-Interactions
  */
 
-// Deep-Dive Technical Architecture & Systems Specifications (Interior Modal Views)
 const caseStudyData = {
   telemetry: {
     tag: "SYS_01 // REAL-TIME TRANSIT & TELEMETRY",
@@ -28,10 +27,10 @@ const caseStudyData = {
       "PostGIS Spatial Bounding: Micro-indexed proximity queries locating nearest operational bus stops in <3ms."
     ],
     benchmarks: [
-      { key: "DISPATCH LATENCY", val: "Sub-25ms WebSocket Delays" },
-      { key: "AGGREGATE SCALE", val: "50,000+ Commuters Targeted" },
-      { key: "CONCURRENCY", val: "10,000+ Simultaneous Sockets" },
-      { key: "FILTER KERNEL", val: "Kalman Spatial Noise Smoothing" }
+      { key: "DISPATCH LATENCY", val: "25", unit: "ms" },
+      { key: "AGGREGATE SCALE", val: "50000", unit: "+" },
+      { key: "CONCURRENCY", val: "10000", unit: "+" },
+      { key: "FILTER KERNEL", val: "Kalman Filter", unit: "" }
     ]
   },
 
@@ -57,10 +56,10 @@ const caseStudyData = {
       "PWA Offline Storage: Compressed ticket tokens stored locally within indexed client cache for instant offline retrieval."
     ],
     benchmarks: [
-      { key: "SECURITY LEVEL", val: "100% Zero-Connectivity Validation" },
-      { key: "POS CHECK TIME", val: "< 1ms Local Signature Check" },
-      { key: "CRYPTO STANDARD", val: "HMAC SHA-256 with Salt Nonce" },
-      { key: "DB TRANSACTION", val: "PostgreSQL Row-Level Locks" }
+      { key: "CONNECTIVITY REQUIRED", val: "0", unit: "%" },
+      { key: "POS CHECK TIME", val: "1", unit: "ms" },
+      { key: "CRYPTO STANDARD", val: "SHA-256", unit: "" },
+      { key: "DB LOCKING", val: "Row-Level", unit: "" }
     ]
   },
 
@@ -86,10 +85,10 @@ const caseStudyData = {
       "40+ Mapped Stops: Accurately calibrated bus stops mapped across remote regional transit corridors."
     ],
     benchmarks: [
-      { key: "NETWORK COVERAGE", val: "40+ Valley Bus Stops Mapped" },
-      { key: "CACHE FOOTPRINT", val: "< 18MB Full Corridor Tiles" },
-      { key: "MAP RENDERING", val: "12ms Local Canvas Vectors" },
-      { key: "FALLBACK CHANNEL", val: "Automated USSD / SMS 2G Gateway" }
+      { key: "STOPS MAPPED", val: "40", unit: "+" },
+      { key: "CACHE FOOTPRINT", val: "18", unit: "MB" },
+      { key: "MAP RENDERING", val: "12", unit: "ms" },
+      { key: "FALLBACK CHANNEL", val: "2G USSD", unit: "" }
     ]
   },
 
@@ -115,36 +114,36 @@ const caseStudyData = {
       "Multi-Modal Synthesizer: Seamless integration of fixed-schedule state buses, shared passenger cabs, and walking transfers."
     ],
     benchmarks: [
-      { key: "SEARCH LATENCY", val: "< 40ms Pareto Frontier Compute" },
-      { key: "CACHE HIT RATIO", val: "94.2% In-Memory Graph Nodes" },
-      { key: "SEARCH KERNEL", val: "Multi-Objective Heuristic A*" },
-      { key: "FRAMEWORK", val: "FastAPI + NetworkX Microservice" }
+      { key: "SEARCH LATENCY", val: "40", unit: "ms" },
+      { key: "CACHE HIT RATIO", val: "94.2", unit: "%" },
+      { key: "SEARCH KERNEL", val: "A* Pareto", unit: "" },
+      { key: "FRAMEWORK", val: "FastAPI", unit: "" }
     ]
   }
 };
 
 /* ==========================================================================
-   DOM Initialization
-   ========================================================================== */
+   Initialization Sequence
+   ========================================================================= */
 document.addEventListener("DOMContentLoaded", () => {
-  initThemeManager();
+  initThemeEngine();
   initCaseStudyModal();
   initMobileNavigation();
   initContactForm();
+  initScrollObserver();
 });
 
 /* ==========================================================================
-   1. Theme Management (Newsreader + Space Mono in Dark / Light Mode)
+   1. Theme Management Engine
    ========================================================================== */
-function initThemeManager() {
+function initThemeEngine() {
   const themeToggle = document.getElementById("themeToggle");
   const themeLabel = document.getElementById("themeLabel");
   const html = document.documentElement;
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-  // Check saved preference or default to dark
   const savedTheme = localStorage.getItem("fb_portfolio_theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const initialTheme = savedTheme || (prefersDark ? "dark" : "dark");
+  const initialTheme = savedTheme || (mediaQuery.matches ? "dark" : "dark");
 
   setTheme(initialTheme);
 
@@ -157,17 +156,22 @@ function initThemeManager() {
     });
   }
 
+  mediaQuery.addEventListener("change", (e) => {
+    if (!localStorage.getItem("fb_portfolio_theme")) {
+      setTheme(e.matches ? "dark" : "light");
+    }
+  });
+
   function setTheme(theme) {
     html.setAttribute("data-theme", theme);
     if (themeLabel) {
-      themeLabel.textContent = theme === "dark" ? "Dark" : "Light";
+      themeLabel.textContent = theme.toUpperCase();
     }
   }
 }
 
 /* ==========================================================================
-   2. Interior Case Study Architecture Modal (#moduleModal)
-   Houses detailed architecture diagrams, flowcharts, and performance metrics
+   2. Case Study Interior Modal Engine
    ========================================================================== */
 function initCaseStudyModal() {
   const modal = document.getElementById("moduleModal");
@@ -180,46 +184,53 @@ function initCaseStudyModal() {
 
   if (!modal) return;
 
-  const triggerButtons = document.querySelectorAll(".modal-trigger-btn");
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".modal-trigger-btn");
+    if (!btn) return;
 
-  triggerButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const moduleId = btn.getAttribute("data-module");
-      const data = caseStudyData[moduleId];
+    e.preventDefault();
+    const moduleId = btn.getAttribute("data-module");
+    const data = caseStudyData[moduleId];
 
-      if (!data) return;
+    if (!data) return;
 
-      modalTag.textContent = data.tag;
-      modalTitle.textContent = data.title;
-      modalSubtitle.textContent = data.subtitle;
+    modalTag.textContent = data.tag;
+    modalTitle.textContent = data.title;
+    modalSubtitle.textContent = data.subtitle;
 
-      modalBody.innerHTML = `
-        <p>${data.overview}</p>
+    modalBody.innerHTML = `
+      <p class="modal-overview-text">${data.overview}</p>
 
+      <div class="modal-section-header">
         <h4>PIPELINE ARCHITECTURE &amp; FLOWCHART</h4>
-        <pre class="modal-diagram">${data.diagram}</pre>
+      </div>
+      <pre class="modal-diagram">${data.diagram}</pre>
 
+      <div class="modal-section-header">
         <h4>CORE ARCHITECTURAL HIGHLIGHTS</h4>
-        <ul style="padding-left: 1.2rem; margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: 0.45rem;">
-          ${data.highlights.map(h => `<li>${h}</li>`).join("")}
-        </ul>
+      </div>
+      <ul class="modal-highlights-list">
+        ${data.highlights.map(h => `<li>${h}</li>`).join("")}
+      </ul>
 
+      <div class="modal-section-header">
         <h4>SYSTEM PERFORMANCE BENCHMARKS</h4>
-        <ul class="modal-benchmarks-list">
-          ${data.benchmarks.map(b => `
-            <li>
-              <span class="benchmark-k">${b.key}</span>
-              <span class="benchmark-v">${b.val}</span>
-            </li>
-          `).join("")}
-        </ul>
-      `;
+      </div>
+      <ul class="modal-benchmarks-list">
+        ${data.benchmarks.map(b => `
+          <li>
+            <span class="benchmark-k">${b.key}</span>
+            <span class="benchmark-v" data-target="${b.val}">${isNaN(b.val) ? b.val : '0'}${b.unit}</span>
+          </li>
+        `).join("")}
+      </ul>
+    `;
 
-      modal.classList.add("active");
-      modal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    });
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    animateBenchmarkCounters(modalBody);
   });
 
   function closeModal() {
@@ -243,7 +254,34 @@ function initCaseStudyModal() {
 }
 
 /* ==========================================================================
-   3. Mobile Navigation Drawer
+   3. Benchmark Numerical Counter Animation
+   ========================================================================== */
+function animateBenchmarkCounters(container) {
+  const elements = container.querySelectorAll(".benchmark-v[data-target]");
+  elements.forEach(el => {
+    const targetVal = parseFloat(el.getAttribute("data-target"));
+    if (isNaN(targetVal)) return;
+
+    const unit = el.textContent.replace(/[0-9.]/g, '');
+    let currentVal = 0;
+    const duration = 800;
+    const steps = 30;
+    const increment = targetVal / steps;
+    const stepTime = duration / steps;
+
+    const timer = setInterval(() => {
+      currentVal += increment;
+      if (currentVal >= targetVal) {
+        currentVal = targetVal;
+        clearInterval(timer);
+      }
+      el.textContent = `${Number.isInteger(targetVal) ? Math.round(currentVal) : currentVal.toFixed(1)}${unit}`;
+    }, stepTime);
+  });
+}
+
+/* ==========================================================================
+   4. Mobile Navigation Drawer Controller
    ========================================================================== */
 function initMobileNavigation() {
   const menuBtn = document.getElementById("mobileMenuBtn");
@@ -256,8 +294,7 @@ function initMobileNavigation() {
     drawer.setAttribute("aria-hidden", (!isOpen).toString());
   });
 
-  const links = drawer.querySelectorAll(".mobile-nav-link");
-  links.forEach(link => {
+  drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
     link.addEventListener("click", () => {
       drawer.classList.remove("active");
       drawer.setAttribute("aria-hidden", "true");
@@ -266,7 +303,7 @@ function initMobileNavigation() {
 }
 
 /* ==========================================================================
-   4. Direct Contact Form Dispatch Feedback
+   5. Direct Contact Form Dispatch & Feedback
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById("contactForm");
@@ -276,8 +313,42 @@ function initContactForm() {
     e.preventDefault();
     const nameInput = document.getElementById("userName");
     const name = nameInput ? nameInput.value.trim() : "there";
-    
-    alert(`Thank you, ${name}. Your message proposal has been prepared. You may also reach Farhaan directly at farhanbashir327426@gmail.com or +91 6006048125.`);
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    if (submitBtn) {
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = "DISPATCHING...";
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        alert(`Message recorded for ${name}. Direct contact channels: farhanbashir327426@gmail.com | +91 6006048125.`);
+        form.reset();
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }, 400);
+    }
   });
+}
+
+/* ==========================================================================
+   6. Scroll-Driven Section Active State Observer
+   ========================================================================== */
+function initScrollObserver() {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  if (!sections.length || !navLinks.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(section => observer.observe(section));
 }

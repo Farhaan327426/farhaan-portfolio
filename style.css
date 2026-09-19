@@ -181,7 +181,8 @@ button, input, textarea {
   border-bottom: 1px solid transparent;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--text-primary);
   border-bottom-color: var(--accent-cyan);
 }
