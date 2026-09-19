@@ -1,36 +1,17 @@
 /**
- * Farhaan Bashir | AI Systems & Engineering Portfolio Logic
+ * FARHAAN BASHIR — PORTFOLIO CORE ENGINE
+ * Typographic System: Newsreader + Space Mono
+ * Architecture: Static 4-System Grid + Deep-Dive Architecture Case Studies
  */
 
-const drawerData = {
-  itinerary: {
-    title: "AI Multi-Modal Itinerary Engine",
-    subtitle: "Multi-Objective Heuristic A* Graph Optimization",
-    diagram: `
-+-----------------------+      +-----------------------+
-|  Real-Time Weather    | ---> |  Heuristic Weighting  |
-|  (Precipitation/Snow) |      |  (Elevation Gradient) |
-+-----------------------+      +-----------------------+
-                                           |
-                                           v
-+-----------------------+      +-----------------------+
-|  Dynamic Road Network | ---> |  Multi-Objective A*   | ---> Pareto-Optimal
-|  (Buses + Cabs + Walk)|      |  Pareto Search Kernel |      Route Set (<40ms)
-+-----------------------+      +-----------------------+
-    `,
-    overview: "Engineered for complex mountainous corridors in Jammu & Kashmir. Dispatches custom multi-objective graph searches combining local transit schedules, cab hauls, and walking legs with elevation and weather penalty weights.",
-    metrics: [
-      { key: "Search Latency", value: "< 40ms (Pareto Frontier)" },
-      { key: "Algorithmic Engine", value: "Multi-Objective A* Graph Search" },
-      { key: "Spatial Tile Hit Ratio", value: "94.2% Cached in Memory" },
-      { key: "Microservice Framework", value: "FastAPI + NetworkX (Async IO)" }
-    ]
-  },
+// Deep-Dive Technical Architecture & Systems Specifications (Interior Modal Views)
+const caseStudyData = {
   telemetry: {
-    title: "Live Route Intelligence & Telemetry Pipeline",
+    tag: "SYS_01 // REAL-TIME TRANSIT & TELEMETRY",
+    title: "Live Route Intelligence Engine",
     subtitle: "High-Throughput Spatial Ingestion & Predictive Dispatch",
-    diagram: `
-+-----------------------+      +-----------------------+      +-----------------------+
+    overview: "Built for SAFARapp, this high-concurrency real-time telemetry streaming cluster ingests continuous GPS updates from public buses navigating complex Himalayan valleys in Jammu & Kashmir. The engine eliminates mountain multipath reflections using recursive Kalman filtering and broadcasts sub-second arrival predictions directly to commuter devices.",
+    diagram: `+-----------------------+      +-----------------------+      +-----------------------+
 |  Hardware Bus GPS     | ---> |  Redis Streams Hub    | ---> |  Kalman Smoothing     |
 |  (MQTT / UDP Delta)   |      |  (Pub/Sub Ingress)    |      |  Spatial Noise Filter |
 +-----------------------+      +-----------------------+      +-----------------------+
@@ -39,21 +20,27 @@ const drawerData = {
                                                              +-------------------------+
                                                              |  WebSocket Cluster Hub  |
                                                              |  (<25ms to Commuter App)|
-                                                             +-------------------------+
-    `,
-    overview: "Real-time streaming cluster that ingests high-frequency transit telemetry across mountain valleys. Smooths out GPS multipath errors using recursive Kalman filtering and broadcasts sub-second arrival updates.",
-    metrics: [
-      { key: "Simultaneous Concurrency", value: "10,000+ Commuter Connections" },
-      { key: "Broadcast Latency", value: "Sub-25ms Delta Dispatch" },
-      { key: "Spatial Store", value: "PostGIS + Redis Spatial Indexes" },
-      { key: "Fault Tolerance", value: "Automatic WebSocket Failover Cluster" }
+                                                             +-------------------------+`,
+    highlights: [
+      "WebSocket Pub/Sub Cluster: Scalable Node.js & Redis cluster handling 10,000+ simultaneous commuter socket connections.",
+      "Sub-25ms Dispatch Latency: High-frequency GPS delta streams dispatched across mountain corridors in under 25 milliseconds.",
+      "Recursive Kalman Filtering: Eliminates spatial multipath drift caused by steep valley cliffs and river gorge topography.",
+      "PostGIS Spatial Bounding: Micro-indexed proximity queries locating nearest operational bus stops in <3ms."
+    ],
+    benchmarks: [
+      { key: "DISPATCH LATENCY", val: "Sub-25ms WebSocket Delays" },
+      { key: "AGGREGATE SCALE", val: "50,000+ Commuters Targeted" },
+      { key: "CONCURRENCY", val: "10,000+ Simultaneous Sockets" },
+      { key: "FILTER KERNEL", val: "Kalman Spatial Noise Smoothing" }
     ]
   },
+
   pass: {
+    tag: "SYS_02 // CONTACTLESS CRYPTOGRAPHY",
     title: "Smart Booking & Offline Cryptographic Pass",
-    subtitle: "HMAC SHA-256 Offline Asymmetric Validation",
-    diagram: `
-+-----------------------+      +-----------------------+      +-----------------------+
+    subtitle: "HMAC-SHA256 Offline Asymmetric Ticket Validation",
+    overview: "An offline-first transit ticketing engine developed for remote corridors where cellular connectivity is intermittent or non-existent. Tickets are cryptographically signed with HMAC-SHA256 and verified locally on conductors' handheld devices in under 1ms with zero internet connection, while PostgreSQL row-level locks guarantee seat consistency.",
+    diagram: `+-----------------------+      +-----------------------+      +-----------------------+
 |  Commuter Booking     | ---> |  HMAC-SHA256 Signer   | ---> |  Scannable Dynamic    |
 |  (PostgreSQL Lock)    |      |  (Transit Root Key)   |      |  Offline QR Ticket    |
 +-----------------------+      +-----------------------+      +-----------------------+
@@ -62,21 +49,27 @@ const drawerData = {
                                                              +-------------------------+
                                                              |  Conductor Offline POS  |
                                                              |  (< 1ms Key Ring Check) |
-                                                             +-------------------------+
-    `,
-    overview: "Cryptographically secured ticket engine allowing offline ticket verification on remote transit routes with zero cellular connectivity. Prevents ticket reuse, tampering, and seat contention through atomic DB transactions.",
-    metrics: [
-      { key: "Offline Validation Speed", value: "< 1ms Verification on Handheld" },
-      { key: "Network Prerequisite", value: "0% Internet Access Required" },
-      { key: "Crypto Standard", value: "HMAC SHA-256 with Rolling Timestamp Nonce" },
-      { key: "Concurrency Defense", value: "PostgreSQL Row-Level Locks (SKIP LOCKED)" }
+                                                             +-------------------------+`,
+    highlights: [
+      "100% Offline Verification: Offline cryptographic signature validation enables rapid bus boarding without internet connectivity.",
+      "Anti-Replay Salt Nonces: Rolling timestamp nonces prevent ticket duplication, screenshot forwarding, and double-use fraud.",
+      "Atomic Row-Level Locking: PostgreSQL 'FOR UPDATE SKIP LOCKED' transactions prevent concurrent seat overbooking on high-demand routes.",
+      "PWA Offline Storage: Compressed ticket tokens stored locally within indexed client cache for instant offline retrieval."
+    ],
+    benchmarks: [
+      { key: "SECURITY LEVEL", val: "100% Zero-Connectivity Validation" },
+      { key: "POS CHECK TIME", val: "< 1ms Local Signature Check" },
+      { key: "CRYPTO STANDARD", val: "HMAC SHA-256 with Salt Nonce" },
+      { key: "DB TRANSACTION", val: "PostgreSQL Row-Level Locks" }
     ]
   },
+
   navigation: {
-    title: "Resilient Mountain Navigation & Vector Cache",
-    subtitle: "Edge GIS Tiling & Low-Bandwidth USSD Fallback",
-    diagram: `
-+-----------------------+      +-----------------------+      +-----------------------+
+    tag: "SYS_03 // RESILIENT MOUNTAIN NAVIGATION",
+    title: "Offline Transit & J&K Bus Network",
+    subtitle: "Edge Vector Tiling & USSD/SMS Automated Gateway",
+    overview: "A resilient mountain navigation subsystem engineered for high-altitude Himalayan transit corridors (Gulmarg, Sonamarg, Pir Panjal pass). Compresses hierarchical vector map tiles and spatial graph routing into an under 18MB local cache, paired with an automated USSD/SMS fallback service for passengers using basic 2G feature phones.",
+    diagram: `+-----------------------+      +-----------------------+      +-----------------------+
 |  Hierarchical Vector  | ---> |  Compressed SQLite    | ---> |  Client Mapbox GL     |
 |  Tile Extraction      |      |  Local Cache (<18MB)  |      |  Offline Vector Map   |
 +-----------------------+      +-----------------------+      +-----------------------+
@@ -85,216 +78,149 @@ const drawerData = {
                                +-----------------------+
                                |  USSD/SMS Gateways    | ---> Fallback Timetable Lookup
                                |  (2G / Zero-Data)     |      Without Smartphones
-                               +-----------------------+
-    `,
-    overview: "Lightweight offline map vector tile renderer and route graph search built for remote Himalayan highways. Bundles cached vector tiles into under 18MB and features an automated SMS/USSD fallback pipeline for commuters without mobile data.",
-    metrics: [
-      { key: "Local Cache Size", value: "< 18MB Complete Route Footprint" },
-      { key: "Offline Map Render", value: "12ms Canvas Vector Refresh" },
-      { key: "Fallback Redundancy", value: "USSD / Shortcode SMS Query Hub" },
-      { key: "Map Engine", value: "Mapbox GL + Local Hive SQLite" }
+                               +-----------------------+`,
+    highlights: [
+      "Compressed Vector Tiles: Full valley route network encoded into under 18MB local SQLite/Hive storage footprint.",
+      "Offline Graph Traversal: On-device topological graph traversal providing turn-by-turn bus corridor directions without cellular signal.",
+      "USSD / SMS Automated Fallback: Commuters on feature phones query departure times and delay estimates via automated shortcode queries.",
+      "40+ Mapped Stops: Accurately calibrated bus stops mapped across remote regional transit corridors."
+    ],
+    benchmarks: [
+      { key: "NETWORK COVERAGE", val: "40+ Valley Bus Stops Mapped" },
+      { key: "CACHE FOOTPRINT", val: "< 18MB Full Corridor Tiles" },
+      { key: "MAP RENDERING", val: "12ms Local Canvas Vectors" },
+      { key: "FALLBACK CHANNEL", val: "Automated USSD / SMS 2G Gateway" }
+    ]
+  },
+
+  itinerary: {
+    tag: "SYS_04 // ALGORITHMIC ROUTE OPTIMIZATION",
+    title: "AI Multi-Modal Itinerary Engine",
+    subtitle: "Multi-Objective Heuristic A* Pareto Search Kernel",
+    overview: "Custom multi-objective pathfinding engine calculating complex multi-modal journeys (local bus routes + shared valley cabs + pedestrian transfers). Dynamically evaluates Pareto-optimal route frontiers by incorporating real-time Himalayan weather disruptions, snow accumulation, and elevation slope penalties.",
+    diagram: `+-----------------------+      +-----------------------+
+|  Real-Time Weather    | ---> |  Heuristic Weighting  |
+|  (Precipitation/Snow) |      |  (Elevation Gradient) |
++-----------------------+      +-----------------------+
+                                           |
+                                           v
++-----------------------+      +-----------------------+
+|  Dynamic Road Network | ---> |  Multi-Objective A*   | ---> Pareto-Optimal
+|  (Buses + Cabs + Walk)|      |  Pareto Search Kernel |      Route Set (<40ms)
++-----------------------+      +-----------------------+`,
+    highlights: [
+      "Sub-40ms Heuristics: High-performance FastAPI and NetworkX async microservice returning Pareto-optimal itineraries in under 40 milliseconds.",
+      "Environmental Penalty Model: Walking legs and mountain transfer links dynamically re-weighted based on live rain, snow, and altitude gain.",
+      "In-Memory Spatial Graph: 94.2% cache hit ratio across road topology network graphs stored in memory.",
+      "Multi-Modal Synthesizer: Seamless integration of fixed-schedule state buses, shared passenger cabs, and walking transfers."
+    ],
+    benchmarks: [
+      { key: "SEARCH LATENCY", val: "< 40ms Pareto Frontier Compute" },
+      { key: "CACHE HIT RATIO", val: "94.2% In-Memory Graph Nodes" },
+      { key: "SEARCH KERNEL", val: "Multi-Objective Heuristic A*" },
+      { key: "FRAMEWORK", val: "FastAPI + NetworkX Microservice" }
     ]
   }
 };
 
+/* ==========================================================================
+   DOM Initialization
+   ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  initProjectFiltering();
-  initTechnicalDrawer();
-  initPortfolioQRModal();
+  initThemeManager();
+  initCaseStudyModal();
+  initMobileNavigation();
   initContactForm();
 });
 
 /* ==========================================================================
-   1. Category Filtering
+   1. Theme Management (Newsreader + Space Mono in Dark / Light Mode)
    ========================================================================== */
-function initProjectFiltering() {
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const projectCards = document.querySelectorAll(".project-card");
+function initThemeManager() {
+  const themeToggle = document.getElementById("themeToggle");
+  const themeLabel = document.getElementById("themeLabel");
+  const html = document.documentElement;
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const category = btn.getAttribute("data-category");
+  // Check saved preference or default to dark
+  const savedTheme = localStorage.getItem("fb_portfolio_theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme || (prefersDark ? "dark" : "dark");
 
-      projectCards.forEach(card => {
-        if (category === "all" || card.getAttribute("data-category") === category) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
-      });
+  setTheme(initialTheme);
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = html.getAttribute("data-theme") || "dark";
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+      setTheme(newTheme);
+      localStorage.setItem("fb_portfolio_theme", newTheme);
     });
-  });
+  }
+
+  function setTheme(theme) {
+    html.setAttribute("data-theme", theme);
+    if (themeLabel) {
+      themeLabel.textContent = theme === "dark" ? "Dark" : "Light";
+    }
+  }
 }
 
 /* ==========================================================================
-   2. Technical Architecture Drawer
+   2. Interior Case Study Architecture Modal (#moduleModal)
+   Houses detailed architecture diagrams, flowcharts, and performance metrics
    ========================================================================== */
-function initTechnicalDrawer() {
-  const drawer = document.getElementById("technicalDrawer");
-  const closeDrawer = document.getElementById("closeDrawer");
-  const drawerContent = document.getElementById("drawerContent");
-  const backdrop = document.getElementById("drawerBackdrop");
+function initCaseStudyModal() {
+  const modal = document.getElementById("moduleModal");
+  const modalClose = document.getElementById("modalClose");
+  const modalDismiss = document.getElementById("modalDismiss");
+  const modalTag = document.getElementById("modalTag");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalSubtitle = document.getElementById("modalSubtitle");
+  const modalBody = document.getElementById("modalBody");
 
-  document.querySelectorAll(".inspect-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const id = btn.getAttribute("data-id");
-      const data = drawerData[id];
+  if (!modal) return;
+
+  const triggerButtons = document.querySelectorAll(".modal-trigger-btn");
+
+  triggerButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const moduleId = btn.getAttribute("data-module");
+      const data = caseStudyData[moduleId];
+
       if (!data) return;
 
-      drawerContent.innerHTML = `
-        <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.3rem;">${data.title}</h2>
-        <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 1.2rem;">${data.subtitle}</div>
-        
-        <p style="color: var(--text-secondary); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.4rem;">${data.overview}</p>
-        
-        <div style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">PIPELINE SCHEMATIC</div>
-        <pre style="background: var(--bg-base); padding: 1.2rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-primary); border: 1px solid var(--border-subtle); overflow-x: auto; line-height: 1.4; margin-bottom: 1.5rem;">${data.diagram}</pre>
-        
-        <div style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.6rem;">CORE PERFORMANCE BENCHMARKS</div>
-        <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.8rem;">
-          ${data.metrics.map(m => `
-            <li style="background: var(--bg-elevated); border: 1px solid var(--border-subtle); padding: 0.6rem 0.9rem; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem;">
-              <span style="color: var(--text-secondary); font-family: var(--font-mono);">${m.key}</span>
-              <strong style="color: var(--accent-emerald); font-family: var(--font-mono);">${m.value}</strong>
+      modalTag.textContent = data.tag;
+      modalTitle.textContent = data.title;
+      modalSubtitle.textContent = data.subtitle;
+
+      modalBody.innerHTML = `
+        <p>${data.overview}</p>
+
+        <h4>PIPELINE ARCHITECTURE &amp; FLOWCHART</h4>
+        <pre class="modal-diagram">${data.diagram}</pre>
+
+        <h4>CORE ARCHITECTURAL HIGHLIGHTS</h4>
+        <ul style="padding-left: 1.2rem; margin-bottom: 1.4rem; display: flex; flex-direction: column; gap: 0.45rem;">
+          ${data.highlights.map(h => `<li>${h}</li>`).join("")}
+        </ul>
+
+        <h4>SYSTEM PERFORMANCE BENCHMARKS</h4>
+        <ul class="modal-benchmarks-list">
+          ${data.benchmarks.map(b => `
+            <li>
+              <span class="benchmark-k">${b.key}</span>
+              <span class="benchmark-v">${b.val}</span>
             </li>
           `).join("")}
         </ul>
-
-        <div style="padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-          <a href="https://github.com/Farhaan327426" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center;">
-            Inspect GitHub Repository ↗
-          </a>
-        </div>
       `;
 
-      drawer.classList.add("open");
-      if (backdrop) backdrop.classList.add("active");
-      drawer.setAttribute("aria-hidden", "false");
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
     });
   });
-
-  function dismissDrawer() {
-    drawer.classList.remove("open");
-    if (backdrop) backdrop.classList.remove("active");
-    drawer.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-  }
-
-  if (closeDrawer) closeDrawer.addEventListener("click", dismissDrawer);
-  if (backdrop) backdrop.addEventListener("click", dismissDrawer);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && drawer.classList.contains("open")) {
-      dismissDrawer();
-    }
-  });
-}
-
-/* ==========================================================================
-   3. Portfolio Digital QR Suite Modal
-   ========================================================================== */
-function initPortfolioQRModal() {
-  if (typeof QRCodeEngine === "undefined") return;
-
-  const scanPassBtn = document.getElementById("scanPassBtn");
-  const openContactQrBtn = document.getElementById("openContactQrBtn");
-  const modal = document.getElementById("portfolioQrModal");
-  const modalClose = document.getElementById("portfolioQrClose");
-  const qrContainer = document.getElementById("portfolioQrContainer");
-  const qrTabs = document.querySelectorAll(".p-qr-tab");
-  const qrTitle = document.getElementById("pQrTitle");
-  const qrDesc = document.getElementById("pQrDesc");
-  const btnCopy = document.getElementById("btnCopyPortfolioLink");
-  const btnDownload = document.getElementById("btnDownloadPortfolioPass");
-
-  if (!modal || !qrContainer) return;
-
-  const portfolioUrl = window.location.origin && window.location.origin !== "null"
-    ? window.location.href.split("#")[0]
-    : "https://farhaan327426.github.io/farhaan-portfolio/";
-
-  const vCardPayload = QRCodeEngine.createVCard({
-    firstName: "Farhaan",
-    lastName: "Bashir",
-    org: "SAFARapp Mobility & Transit Systems",
-    title: "Founder & Lead Engineer",
-    phone: "+916006048125",
-    email: "farhanbashir327426@gmail.com",
-    url: portfolioUrl,
-    note: "Engineering intelligent transit AI, routing heuristics, and real-time spatial streaming."
-  });
-
-  const qrModes = {
-    mobile: {
-      title: "Scan to Open Portfolio on Mobile",
-      desc: "Point your smartphone camera at the QR code to seamlessly browse Farhaan Bashir’s portfolio on your phone.",
-      payload: portfolioUrl,
-      filename: "farhaan-bashir-portfolio.png",
-      copyText: portfolioUrl,
-      copyLabel: "Copy Portfolio Link 🔗"
-    },
-    vcard: {
-      title: "Save Farhaan Bashir’s Digital Pass",
-      desc: "Point your camera to instantly add Farhaan Bashir (Founder & Lead Engineer, SAFARapp) to your phone contacts.",
-      payload: vCardPayload,
-      filename: "farhaan-bashir-vcard.png",
-      copyText: vCardPayload,
-      copyLabel: "Copy vCard 📋"
-    },
-    whatsapp: {
-      title: "Chat with Farhaan on WhatsApp",
-      desc: "Scan to immediately launch a direct WhatsApp conversation with Farhaan (+91 6006048125).",
-      payload: "https://wa.me/916006048125?text=Hi%20Farhaan,%20I%20am%20reviewing%20your%20portfolio!",
-      filename: "farhaan-bashir-whatsapp.png",
-      copyText: "https://wa.me/916006048125",
-      copyLabel: "Copy WhatsApp Link 💬"
-    },
-    github: {
-      title: "Farhaan’s GitHub Profile",
-      desc: "Scan to explore Farhaan’s repositories, architecture proofs-of-concept, and production code.",
-      payload: "https://github.com/Farhaan327426",
-      filename: "farhaan-bashir-github.png",
-      copyText: "https://github.com/Farhaan327426",
-      copyLabel: "Copy GitHub Link 🐙"
-    }
-  };
-
-  let activeMode = "mobile";
-
-  function renderQR() {
-    const item = qrModes[activeMode];
-    const svg = QRCodeEngine.generateSVG(item.payload, {
-      size: 200,
-      colorDark: "#10B981",
-      colorLight: "#080C14",
-      rounded: true,
-      cornerGlow: true
-    });
-
-    qrContainer.innerHTML = svg;
-    if (qrTitle) qrTitle.textContent = item.title;
-    if (qrDesc) qrDesc.textContent = item.desc;
-    if (btnCopy) btnCopy.textContent = item.copyLabel;
-  }
-
-  qrTabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-      qrTabs.forEach(t => t.classList.remove("active"));
-      tab.classList.add("active");
-      activeMode = tab.getAttribute("data-mode") || "mobile";
-      renderQR();
-    });
-  });
-
-  function openModal() {
-    renderQR();
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-  }
 
   function closeModal() {
     modal.classList.remove("active");
@@ -302,9 +228,8 @@ function initPortfolioQRModal() {
     document.body.style.overflow = "";
   }
 
-  if (scanPassBtn) scanPassBtn.addEventListener("click", openModal);
-  if (openContactQrBtn) openContactQrBtn.addEventListener("click", openModal);
   if (modalClose) modalClose.addEventListener("click", closeModal);
+  if (modalDismiss) modalDismiss.addEventListener("click", closeModal);
 
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
@@ -315,39 +240,33 @@ function initPortfolioQRModal() {
       closeModal();
     }
   });
-
-  if (btnCopy) {
-    btnCopy.addEventListener("click", () => {
-      const item = qrModes[activeMode];
-      navigator.clipboard.writeText(item.copyText).then(() => {
-        const prev = btnCopy.textContent;
-        btnCopy.textContent = "Copied! ✓";
-        setTimeout(() => { btnCopy.textContent = prev; }, 2000);
-      });
-    });
-  }
-
-  if (btnDownload) {
-    btnDownload.addEventListener("click", () => {
-      const item = qrModes[activeMode];
-      const canvas = document.createElement("canvas");
-      QRCodeEngine.renderToCanvas(canvas, item.payload, {
-        size: 360,
-        colorDark: "#080C14",
-        colorLight: "#FFFFFF",
-        margin: 2
-      });
-
-      const link = document.createElement("a");
-      link.download = item.filename;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-  }
 }
 
 /* ==========================================================================
-   4. Contact Form Validation
+   3. Mobile Navigation Drawer
+   ========================================================================== */
+function initMobileNavigation() {
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const drawer = document.getElementById("mobileNavDrawer");
+
+  if (!menuBtn || !drawer) return;
+
+  menuBtn.addEventListener("click", () => {
+    const isOpen = drawer.classList.toggle("active");
+    drawer.setAttribute("aria-hidden", (!isOpen).toString());
+  });
+
+  const links = drawer.querySelectorAll(".mobile-nav-link");
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      drawer.classList.remove("active");
+      drawer.setAttribute("aria-hidden", "true");
+    });
+  });
+}
+
+/* ==========================================================================
+   4. Direct Contact Form Dispatch Feedback
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById("contactForm");
@@ -355,20 +274,10 @@ function initContactForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const submitBtn = form.querySelector("button[type='submit']");
-    const originalText = submitBtn.innerHTML;
-
-    const name = document.getElementById("userName").value;
-    const email = document.getElementById("userEmail").value;
-
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `Sending...`;
-
-    setTimeout(() => {
-      alert(`Thank you, ${name}! Your inquiry has been dispatched to Farhaan Bashir (farhanbashir327426@gmail.com / +91 6006048125).\n\nWe will get back to you shortly at ${email}.`);
-      form.reset();
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
-    }, 800);
+    const nameInput = document.getElementById("userName");
+    const name = nameInput ? nameInput.value.trim() : "there";
+    
+    alert(`Thank you, ${name}. Your message proposal has been prepared. You may also reach Farhaan directly at farhanbashir327426@gmail.com or +91 6006048125.`);
+    form.reset();
   });
 }
