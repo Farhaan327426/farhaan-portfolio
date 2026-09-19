@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="case-study-styles.css">
 </head>
 <body>
 
@@ -153,7 +154,7 @@
                 <span class="tech-tag">PostGIS</span>
               </div>
 
-              <button class="card-btn modal-trigger-btn" data-module="telemetry" aria-label="Open architecture deep-dive for Live Route Intelligence Engine">
+              <button class="card-btn modal-trigger-btn" data-module="telemetry" data-case-study="telemetry" aria-label="Open architecture deep-dive for Live Route Intelligence Engine">
                 Read Case Study →
               </button>
             </div>
@@ -215,7 +216,7 @@
                 <span class="tech-tag">Razorpay</span>
               </div>
 
-              <button class="card-btn modal-trigger-btn" data-module="pass" aria-label="Open architecture deep-dive for Smart Booking & Offline Pass">
+              <button class="card-btn modal-trigger-btn" data-module="pass" data-case-study="pass" aria-label="Open architecture deep-dive for Smart Booking & Offline Pass">
                 Read Case Study →
               </button>
             </div>
@@ -276,7 +277,7 @@
                 <span class="tech-tag">USSD Gateway</span>
               </div>
 
-              <button class="card-btn modal-trigger-btn" data-module="navigation" aria-label="Open architecture deep-dive for Offline Transit Network">
+              <button class="card-btn modal-trigger-btn" data-module="navigation" data-case-study="navigation" aria-label="Open architecture deep-dive for Offline Transit Network">
                 Read Case Study →
               </button>
             </div>
@@ -337,7 +338,7 @@
                 <span class="tech-tag">OpenTripPlanner</span>
               </div>
 
-              <button class="card-btn modal-trigger-btn" data-module="itinerary" aria-label="Open architecture deep-dive for AI Multi-Modal Engine">
+              <button class="card-btn modal-trigger-btn" data-module="itinerary" data-case-study="itinerary" aria-label="Open architecture deep-dive for AI Multi-Modal Engine">
                 Read Case Study →
               </button>
             </div>
@@ -518,27 +519,8 @@
     </div>
   </footer>
 
-  <!-- Case Study Deep-Dive Modal (Strictly Housing Technical Assets & Architecture Flowcharts) -->
-  <div class="modal-overlay" id="moduleModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose" aria-label="Close Case Study Modal">✕</button>
-      <div class="modal-header">
-        <span class="modal-tag" id="modalTag">CASE STUDY ARCHITECTURE</span>
-        <h3 class="modal-title" id="modalTitle">Module Title</h3>
-        <p class="modal-subtitle" id="modalSubtitle">Subsystem Overview</p>
-      </div>
-
-      <div class="modal-body" id="modalBody">
-        <!-- Injected via app.js -->
-      </div>
-
-      <div class="modal-footer">
-        <button class="btn-secondary" id="modalDismiss">Close Case Study</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Application Logic -->
+  <!-- Application & Case Study System Logic -->
   <script src="app.js"></script>
+  <script src="case-study-system.js"></script>
 </body>
 </html>
