@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Farhaan Bashir — Founder &amp; Lead Engineer, SAFARapp</title>
+  <meta name="description" content="Portfolio of Farhaan Bashir, Founder &amp; Lead Engineer behind SAFARapp. Engineering real-time transit telemetry, offline cryptographic validation, and multi-modal routing heuristics.">
+  <meta name="author" content="Farhaan Bashir">
+  
+  <!-- Dual-Typeface System: Newsreader (Display & Editorial) + Space Mono (Data & Technical UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="case-study-styles.css?v=3.0">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="shell header-container">
+      <a href="#top" class="wordmark" aria-label="Farhaan Bashir, home">
+        <span class="brand-badge">./</span>
+        <span class="brand-name">Farhaan Bashir</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#capabilities" class="nav-link">Capabilities</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-right-actions">
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle Color Theme" title="Toggle Light / Dark theme">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="theme-label" id="themeLabel">Dark</span>
+        </button>
+        <a href="https://github.com/Farhaan327426" target="_blank" rel="noopener" class="btn-github">
+          GitHub ↗
+        </a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true">
+      <a href="#work" class="mobile-nav-link">Work</a>
+      <a href="#capabilities" class="mobile-nav-link">Capabilities</a>
+      <a href="#contact" class="mobile-nav-link">Contact</a>
+      <a href="https://github.com/Farhaan327426" target="_blank" rel="noopener" class="mobile-nav-link">GitHub ↗</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="hero shell">
+      <div class="hero-kicker">
+        <span class="status-dot"></span>
+        <span class="location-tag">Active / Transit AI &amp; Spatial Telemetry · Kashmir, India</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-headline-box">
+          <h1 class="hero-title">
+            Engineering the <em class="serif-italic">journey</em> behind modern transit.
+          </h1>
+          <p class="hero-bio-copy">
+            Software engineer and founder behind SAFARapp. Specializing in Kalman-filtered vehicle telemetry, offline-first cryptographic validation, and multi-modal A* heuristic routing engines built for complex mountain corridors.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#work">
+              Explore Systems ↓
+            </a>
+            <a class="btn-secondary" href="mailto:farhanbashir327426@gmail.com">
+              Direct Inquiries ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-avatar-box">
+          <div class="avatar-frame">
+            <img src="profile.jpg" alt="Farhaan Bashir" class="avatar-img" onerror="this.onerror=null; this.src='profile.jpg.jpeg';">
+            <div class="avatar-badge">FARHAAN BASHIR / FOUNDER, SAFARapp</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 01: Engineering Builds (Asymmetrical Grid) -->
+    <section class="section-pad projects-section" id="work">
+      <div class="shell">
+        <div class="section-intro">
+          <span class="section-tag">01 / Production Systems</span>
+          <h2 class="section-title">Engineering Builds</h2>
+          <p>Production systems solving real problems in mountain transit: live coordination without internet, cryptographic ticketing offline, and resilient routing across remote corridors.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1: Telemetry -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Real-Time Coordination</div>
+              <h3 class="project-title">50,000 people now know when their bus arrives</h3>
+              <p class="project-subtitle">Live GPS tracking from buses moving through Himalayan valleys. Positions update every 2 seconds. Works with intermittent cellular in high-altitude corridors.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Signal Latency</span>
+                <span class="fact-value">25ms</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Scale</span>
+                <span class="fact-value">10,000+ simultaneous users tracking live buses</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Kalman filtering eliminates mountain multipath reflection. Raw GPS noise from valley cliffs smoothed to accurate position.</span>
+              </div>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">Node.js</span>
+              <span class="tech-tag">Redis Streams</span>
+              <span class="tech-tag">WebSocket</span>
+              <span class="tech-tag">PostGIS</span>
+            </div>
+
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="telemetry" data-case-study="telemetry" aria-label="Open architecture deep-dive for Live Route Intelligence Engine">
+                Architecture Deep-Dive →
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2: Ticketing -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Offline-First Security</div>
+              <h3 class="project-title">Tickets validate without internet</h3>
+              <p class="project-subtitle">Conductors on handheld devices verify cryptographic signatures locally. No network required. Anti-replay nonces prevent ticket duplication.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Verification Time</span>
+                <span class="fact-value">1ms</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Connectivity Required</span>
+                <span class="fact-value">0%. Works on 2G devices.</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">HMAC-SHA256 signatures + row-level PostgreSQL locks prevent concurrent overbooking on high-demand routes.</span>
+              </div>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">HMAC-SHA256</span>
+              <span class="tech-tag">PostgreSQL</span>
+              <span class="tech-tag">Flutter</span>
+              <span class="tech-tag">PWA</span>
+            </div>
+
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="pass" data-case-study="pass" aria-label="Open architecture deep-dive for Smart Booking & Offline Pass">
+                Architecture Deep-Dive →
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3: Navigation -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Resilient Routing</div>
+              <h3 class="project-title">Navigate mountain routes without cellular</h3>
+              <p class="project-subtitle">Full valley network compressed into 18MB local cache. SMS/USSD fallback for feature phone users who can't run a smartphone app.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Cache Footprint</span>
+                <span class="fact-value">18MB</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Coverage</span>
+                <span class="fact-value">40+ mountain stops across 3,500 km² of corridors</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Hierarchical vector tiles + on-device graph traversal. Feature phone users query routes via SMS shortcodes.</span>
+              </div>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">Mapbox GL</span>
+              <span class="tech-tag">SQLite</span>
+              <span class="tech-tag">USSD Gateway</span>
+              <span class="tech-tag">Vector Tiles</span>
+            </div>
+
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="navigation" data-case-study="navigation" aria-label="Open architecture deep-dive for Offline Transit Network">
+                Architecture Deep-Dive →
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 4: Routing Optimization -->
+          <article class="project-card">
+            <div class="project-header">
+              <div class="project-category">Multi-Modal Intelligence</div>
+              <h3 class="project-title">Journey planner finds 3–5 optimal routes in 40 milliseconds</h3>
+              <p class="project-subtitle">Combines fixed-schedule buses, shared passenger cabs, and walking transfers. Real-time weather adjusts elevation penalties. Returns Pareto frontier of time vs. cost vs. comfort.</p>
+            </div>
+
+            <div class="project-facts">
+              <div class="fact metric">
+                <span class="fact-label">Search Latency</span>
+                <span class="fact-value">40ms</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Cache Efficiency</span>
+                <span class="fact-value">94.2% hit ratio on road graph lookups. Sub-3ms proximity queries.</span>
+              </div>
+              <div class="fact">
+                <span class="fact-label">Problem Solved</span>
+                <span class="fact-value">Multi-objective A* Pareto search kernel. Rain/snow/elevation dynamically re-weight walking legs and transfers.</span>
+              </div>
+            </div>
+
+            <div class="project-tech">
+              <span class="tech-tag">FastAPI</span>
+              <span class="tech-tag">NetworkX</span>
+              <span class="tech-tag">OpenTripPlanner</span>
+              <span class="tech-tag">Python Async</span>
+            </div>
+
+            <div class="project-cta">
+              <button class="project-link modal-trigger-btn" data-module="itinerary" data-case-study="itinerary" aria-label="Open architecture deep-dive for AI Multi-Modal Engine">
+                Architecture Deep-Dive →
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 02: Capabilities & Tech Stack (Strictly 3 Execution Domains: Infrastructure, Client, Data) -->
+    <section class="section-pad capabilities-section" id="capabilities">
+      <div class="shell">
+        <div class="section-header">
+          <span class="section-tag">02 / Technical Arsenal</span>
+          <h2 class="section-title">Execution Domains</h2>
+        </div>
+
+        <div class="domains-grid">
+
+          <!-- Domain 1: Infrastructure -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-index">[ 01 ]</span>
+              <h3 class="domain-title">Infrastructure</h3>
+            </div>
+            <p class="domain-desc">
+              High-concurrency streaming clusters, low-latency telemetry brokers, and spatial persistence stores.
+            </p>
+            <ul class="domain-tech-list">
+              <li><code>Redis Streams (Pub/Sub Cluster)</code></li>
+              <li><code>WebSockets (WSS Sub-25ms Ingress)</code></li>
+              <li><code>PostgreSQL / PostGIS Spatial Indexes</code></li>
+              <li><code>Docker Containerized Services</code></li>
+              <li><code>TimescaleDB Telemetry Store</code></li>
+              <li><code>USSD / Shortcode SMS Gateways</code></li>
+            </ul>
+          </div>
+
+          <!-- Domain 2: Client -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-index">[ 02 ]</span>
+              <h3 class="domain-title">Client</h3>
+            </div>
+            <p class="domain-desc">
+              Offline-first mobile runtimes, vector tile rendering, and resilient edge state persistence.
+            </p>
+            <ul class="domain-tech-list">
+              <li><code>Flutter (Cross-Platform Commuter App)</code></li>
+              <li><code>PWA Service Workers &amp; Cache API</code></li>
+              <li><code>Mapbox GL Vector Tile Pipeline</code></li>
+              <li><code>Hive SQLite Local Key-Value Store</code></li>
+              <li><code>Zero-Connectivity POS Scanner Interface</code></li>
+            </ul>
+          </div>
+
+          <!-- Domain 3: Data -->
+          <div class="domain-card">
+            <div class="domain-header">
+              <span class="domain-index">[ 03 ]</span>
+              <h3 class="domain-title">Data</h3>
+            </div>
+            <p class="domain-desc">
+              Multi-objective heuristic routing kernels, telemetry noise-smoothing math, and cryptographic signing.
+            </p>
+            <ul class="domain-tech-list">
+              <li><code>Python / FastAPI Async IO Microservices</code></li>
+              <li><code>Multi-Objective A* Graph Search Kernels</code></li>
+              <li><code>Recursive Kalman Filtering Algorithms</code></li>
+              <li><code>NetworkX Spatial Graph Optimizers</code></li>
+              <li><code>HMAC-SHA256 Rolling Nonce Cryptography</code></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 03: Contact (Direct Hyperlinked Vectors, mailto: and tel: URIs, Zero QR Code dependencies) -->
+    <section class="section-pad contact-section" id="contact">
+      <div class="shell">
+        <div class="section-header">
+          <span class="section-tag">03 / Connectivity</span>
+          <h2 class="section-title">Direct Contact &amp; Inquiries</h2>
+        </div>
+
+        <div class="contact-layout">
+
+          <!-- Left Column: Standard Hyperlinked Contact Vectors -->
+          <div class="contact-vectors-card">
+            <h3 class="contact-vectors-title">Direct Engineering Vectors</h3>
+            <p class="contact-vectors-desc">
+              Connect directly regarding systems architecture, transit consulting, or advisory engineering roles.
+            </p>
+
+            <div class="vector-links">
+              <!-- Direct mailto: URI -->
+              <a href="mailto:farhanbashir327426@gmail.com" class="vector-link" id="emailContactLink">
+                <span class="vector-icon">✉</span>
+                <div class="vector-info">
+                  <span class="vector-label">DIRECT ELECTRONIC MAIL</span>
+                  <span class="vector-val">farhanbashir327426@gmail.com</span>
+                </div>
+                <span class="vector-arrow">↗</span>
+              </a>
+
+              <!-- Direct tel: URI -->
+              <a href="tel:+916006048125" class="vector-link" id="phoneContactLink">
+                <span class="vector-icon">☎</span>
+                <div class="vector-info">
+                  <span class="vector-label">TELEPHONE / WHATSAPP</span>
+                  <span class="vector-val">+91 6006048125</span>
+                </div>
+                <span class="vector-arrow">↗</span>
+              </a>
+
+              <!-- Direct GitHub link -->
+              <a href="https://github.com/Farhaan327426" target="_blank" rel="noopener" class="vector-link" id="githubContactLink">
+                <span class="vector-icon">🐙</span>
+                <div class="vector-info">
+                  <span class="vector-label">OPEN SOURCE REPOSITORIES</span>
+                  <span class="vector-val">github.com/Farhaan327426</span>
+                </div>
+                <span class="vector-arrow">↗</span>
+              </a>
+
+              <!-- Geographic Location vector -->
+              <div class="vector-link static">
+                <span class="vector-icon">📍</span>
+                <div class="vector-info">
+                  <span class="vector-label">ENGINEERING BASE</span>
+                  <span class="vector-val">Srinagar, Jammu &amp; Kashmir, India</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Dispatch Form -->
+          <div class="contact-form-card">
+            <form class="editorial-form" id="contactForm">
+              <div class="input-field">
+                <label for="userName">YOUR NAME *</label>
+                <input type="text" id="userName" name="userName" placeholder="e.g. Tanzeel Salfi" required>
+              </div>
+
+              <div class="input-field">
+                <label for="userEmail">EMAIL ADDRESS *</label>
+                <input type="email" id="userEmail" name="userEmail" placeholder="e.g. name@domain.com" required>
+              </div>
+
+              <div class="input-field">
+                <label for="userMessage">MESSAGE / PROPOSAL *</label>
+                <textarea id="userMessage" name="userMessage" rows="4" placeholder="Detail your systems challenge, route architecture inquiry, or project..." required maxlength="500"></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+                Dispatch Message ➔
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="shell footer-wrap">
+      <div class="footer-left">
+        <span class="footer-copy">© 2026 Farhaan Bashir</span>
+        <span class="footer-dot">•</span>
+        <span class="footer-tag">SAFARapp Engineering</span>
+      </div>
+      <div class="footer-right">
+        <a href="#top" class="back-top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application & Case Study System Logic -->
+  <script src="case-study-system.js?v=3.0"></script>
+  <script src="app.js?v=3.0"></script>
+</body>
+</html>
