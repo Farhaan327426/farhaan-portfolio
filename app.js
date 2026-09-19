@@ -1,7 +1,6 @@
 /**
- * FARHAAN BASHIR — PORTFOLIO CORE ENGINE
- * Visual System: High-Contrast Monospaced Engineering / Editorial Hybrid
- * Architecture: Modular State-Driven DOM Engines & Micro-Interactions
+ * FARHAAN BASHIR — PORTFOLIO ENGINE (REFACTORED)
+ * Centralized State Management | Micro-Interaction Choreography | Accessibility-First
  */
 
 const caseStudyData = {
@@ -33,7 +32,6 @@ const caseStudyData = {
       { key: "FILTER KERNEL", val: "Kalman Filter", unit: "" }
     ]
   },
-
   pass: {
     tag: "SYS_02 // CONTACTLESS CRYPTOGRAPHY",
     title: "Smart Booking & Offline Cryptographic Pass",
@@ -62,7 +60,6 @@ const caseStudyData = {
       { key: "DB LOCKING", val: "Row-Level", unit: "" }
     ]
   },
-
   navigation: {
     tag: "SYS_03 // RESILIENT MOUNTAIN NAVIGATION",
     title: "Offline Transit & J&K Bus Network",
@@ -91,7 +88,6 @@ const caseStudyData = {
       { key: "FALLBACK CHANNEL", val: "2G USSD", unit: "" }
     ]
   },
-
   itinerary: {
     tag: "SYS_04 // ALGORITHMIC ROUTE OPTIMIZATION",
     title: "AI Multi-Modal Itinerary Engine",
@@ -123,81 +119,139 @@ const caseStudyData = {
 };
 
 /* ==========================================================================
-   Initialization Sequence
-   ========================================================================= */
+   CENTRALIZED STATE MANAGEMENT LAYER
+   ========================================================================== */
+const PortfolioState = {
+  theme: null,
+  modalOpen: false,
+  activeSection: null,
+  isMobile: false,
+  mobileDrawerOpen: false,
+
+  init() {
+    this.theme = this.loadTheme();
+    this.detectMobileBreakpoint();
+    return this;
+  },
+
+  loadTheme() {
+    const saved = localStorage.getItem("fb_portfolio_theme");
+    if (saved) return saved;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "dark";
+  },
+
+  setTheme(theme) {
+    this.theme = theme;
+    document.documentElement.setAttribute("data-theme", theme);
+    const themeLabel = document.getElementById("themeLabel");
+    if (themeLabel) {
+      themeLabel.textContent = theme.toUpperCase();
+    }
+    localStorage.setItem("fb_portfolio_theme", theme);
+  },
+
+  setModalState(isOpen) {
+    this.modalOpen = isOpen;
+    const modal = document.getElementById("moduleModal");
+    if (modal) {
+      modal.setAttribute("aria-hidden", (!isOpen).toString());
+    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  },
+
+  setMobileDrawer(isOpen) {
+    this.mobileDrawerOpen = isOpen;
+    const drawer = document.getElementById("mobileNavDrawer");
+    if (drawer) {
+      drawer.classList.toggle("active", isOpen);
+      drawer.setAttribute("aria-expanded", isOpen.toString());
+    }
+  },
+
+  detectMobileBreakpoint() {
+    this.isMobile = window.innerWidth < 768;
+  }
+};
+
+/* ==========================================================================
+   INITIALIZATION ORCHESTRATION
+   ========================================================================== */
 document.addEventListener("DOMContentLoaded", () => {
+  PortfolioState.init();
   initThemeEngine();
   initCaseStudyModal();
   initMobileNavigation();
   initContactForm();
   initScrollObserver();
+  attachResizeObserver();
+  attachSystemPreferenceListener();
 });
 
 /* ==========================================================================
-   1. Theme Management Engine
+   1. THEME ENGINE WITH OS-LEVEL PREFERENCE SYNC
    ========================================================================== */
 function initThemeEngine() {
   const themeToggle = document.getElementById("themeToggle");
-  const themeLabel = document.getElementById("themeLabel");
-  const html = document.documentElement;
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-  const savedTheme = localStorage.getItem("fb_portfolio_theme");
-  const initialTheme = savedTheme || (mediaQuery.matches ? "dark" : "dark");
-
-  setTheme(initialTheme);
-
+  
   if (themeToggle) {
     themeToggle.addEventListener("click", () => {
-      const currentTheme = html.getAttribute("data-theme") || "dark";
-      const newTheme = currentTheme === "dark" ? "light" : "dark";
-      setTheme(newTheme);
-      localStorage.setItem("fb_portfolio_theme", newTheme);
+      const newTheme = PortfolioState.theme === "dark" ? "light" : "dark";
+      PortfolioState.setTheme(newTheme);
     });
-  }
-
-  mediaQuery.addEventListener("change", (e) => {
-    if (!localStorage.getItem("fb_portfolio_theme")) {
-      setTheme(e.matches ? "dark" : "light");
-    }
-  });
-
-  function setTheme(theme) {
-    html.setAttribute("data-theme", theme);
-    if (themeLabel) {
-      themeLabel.textContent = theme.toUpperCase();
-    }
   }
 }
 
+function attachSystemPreferenceListener() {
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  mediaQuery.addEventListener("change", (e) => {
+    if (!localStorage.getItem("fb_portfolio_theme")) {
+      PortfolioState.setTheme(e.matches ? "dark" : "light");
+    }
+  });
+}
+
 /* ==========================================================================
-   2. Case Study Interior Modal Engine
+   2. CASE STUDY MODAL ENGINE WITH EASED COUNTER ANIMATIONS
    ========================================================================== */
 function initCaseStudyModal() {
   const modal = document.getElementById("moduleModal");
-  const modalClose = document.getElementById("modalClose");
-  const modalDismiss = document.getElementById("modalDismiss");
-  const modalTag = document.getElementById("modalTag");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalSubtitle = document.getElementById("modalSubtitle");
-  const modalBody = document.getElementById("modalBody");
-
   if (!modal) return;
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", handleModalTrigger);
+
+  const modalClose = document.getElementById("modalClose");
+  const modalDismiss = document.getElementById("modalDismiss");
+
+  if (modalClose) modalClose.addEventListener("click", closeModal);
+  if (modalDismiss) modalDismiss.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && PortfolioState.modalOpen) closeModal();
+  });
+
+  function handleModalTrigger(e) {
     const btn = e.target.closest(".modal-trigger-btn");
     if (!btn) return;
-
     e.preventDefault();
+
     const moduleId = btn.getAttribute("data-module");
     const data = caseStudyData[moduleId];
-
     if (!data) return;
 
-    modalTag.textContent = data.tag;
-    modalTitle.textContent = data.title;
-    modalSubtitle.textContent = data.subtitle;
+    populateModalContent(data);
+    openModal();
+  }
 
+  function populateModalContent(data) {
+    document.getElementById("modalTag").textContent = data.tag;
+    document.getElementById("modalTitle").textContent = data.title;
+    document.getElementById("modalSubtitle").textContent = data.subtitle;
+
+    const modalBody = document.getElementById("modalBody");
     modalBody.innerHTML = `
       <p class="modal-overview-text">${data.overview}</p>
 
@@ -226,62 +280,62 @@ function initCaseStudyModal() {
       </ul>
     `;
 
-    modal.classList.add("active");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-
-    animateBenchmarkCounters(modalBody);
-  });
-
-  function closeModal() {
-    modal.classList.remove("active");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    requestAnimationFrame(() => animateBenchmarkCounters(modalBody));
   }
 
-  if (modalClose) modalClose.addEventListener("click", closeModal);
-  if (modalDismiss) modalDismiss.addEventListener("click", closeModal);
+  function openModal() {
+    PortfolioState.setModalState(true);
+    modal.classList.add("active");
+  }
 
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeModal();
-    }
-  });
+  function closeModal() {
+    PortfolioState.setModalState(false);
+    modal.classList.remove("active");
+  }
 }
 
 /* ==========================================================================
-   3. Benchmark Numerical Counter Animation
+   3. EASED BENCHMARK COUNTER ANIMATION (CUBIC-IN-OUT)
    ========================================================================== */
 function animateBenchmarkCounters(container) {
   const elements = container.querySelectorAll(".benchmark-v[data-target]");
-  elements.forEach(el => {
+  
+  elements.forEach((el, idx) => {
     const targetVal = parseFloat(el.getAttribute("data-target"));
     if (isNaN(targetVal)) return;
 
-    const unit = el.textContent.replace(/[0-9.]/g, '');
-    let currentVal = 0;
-    const duration = 800;
-    const steps = 30;
-    const increment = targetVal / steps;
-    const stepTime = duration / steps;
+    const unit = el.textContent.replace(/[0-9.]/g, "");
+    const delay = idx * 50;
+    
+    setTimeout(() => {
+      let currentVal = 0;
+      const duration = 600;
+      const startTime = performance.now();
 
-    const timer = setInterval(() => {
-      currentVal += increment;
-      if (currentVal >= targetVal) {
-        currentVal = targetVal;
-        clearInterval(timer);
+      function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
       }
-      el.textContent = `${Number.isInteger(targetVal) ? Math.round(currentVal) : currentVal.toFixed(1)}${unit}`;
-    }, stepTime);
+
+      function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeInOutCubic(progress);
+        currentVal = targetVal * easedProgress;
+
+        el.textContent = `${Number.isInteger(targetVal) ? Math.round(currentVal) : currentVal.toFixed(1)}${unit}`;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }, delay);
   });
 }
 
 /* ==========================================================================
-   4. Mobile Navigation Drawer Controller
+   4. MOBILE NAVIGATION DRAWER WITH ARIA STATE MANAGEMENT
    ========================================================================== */
 function initMobileNavigation() {
   const menuBtn = document.getElementById("mobileMenuBtn");
@@ -290,20 +344,24 @@ function initMobileNavigation() {
   if (!menuBtn || !drawer) return;
 
   menuBtn.addEventListener("click", () => {
-    const isOpen = drawer.classList.toggle("active");
-    drawer.setAttribute("aria-hidden", (!isOpen).toString());
+    PortfolioState.setMobileDrawer(!PortfolioState.mobileDrawerOpen);
   });
 
   drawer.querySelectorAll(".mobile-nav-link").forEach(link => {
     link.addEventListener("click", () => {
-      drawer.classList.remove("active");
-      drawer.setAttribute("aria-hidden", "true");
+      PortfolioState.setMobileDrawer(false);
     });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!drawer.contains(e.target) && !menuBtn.contains(e.target) && PortfolioState.mobileDrawerOpen) {
+      PortfolioState.setMobileDrawer(false);
+    }
   });
 }
 
 /* ==========================================================================
-   5. Direct Contact Form Dispatch & Feedback
+   5. CONTACT FORM WITH LOADING & SUCCESS STATE CHOREOGRAPHY
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById("contactForm");
@@ -311,27 +369,51 @@ function initContactForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const nameInput = document.getElementById("userName");
-    const name = nameInput ? nameInput.value.trim() : "there";
-    const submitBtn = form.querySelector('button[type="submit"]');
 
-    if (submitBtn) {
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = "DISPATCHING...";
-      submitBtn.disabled = true;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const nameInput = document.getElementById("userName");
+    const name = nameInput?.value.trim() || "there";
+
+    if (!submitBtn) return;
+
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = "DISPATCHING…";
+    submitBtn.disabled = true;
+    submitBtn.setAttribute("data-state", "loading");
+
+    setTimeout(() => {
+      submitBtn.setAttribute("data-state", "success");
+      submitBtn.textContent = "MESSAGE RECEIVED";
 
       setTimeout(() => {
-        alert(`Message recorded for ${name}. Direct contact channels: farhanbashir327426@gmail.com | +91 6006048125.`);
-        form.reset();
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-      }, 400);
-    }
+        submitBtn.setAttribute("data-state", "idle");
+        form.reset();
+
+        showContactNotification(name);
+      }, 1200);
+    }, 500);
   });
 }
 
+function showContactNotification(name) {
+  const notification = document.createElement("div");
+  notification.className = "contact-notification";
+  notification.setAttribute("role", "alert");
+  notification.innerHTML = `
+    <p>Direct channels: <strong>farhanbashir327426@gmail.com</strong> | <strong>+91 6006048125</strong></p>
+  `;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.add("fade-out");
+    setTimeout(() => notification.remove(), 300);
+  }, 4000);
+}
+
 /* ==========================================================================
-   6. Scroll-Driven Section Active State Observer
+   6. SCROLL-DRIVEN SECTION ACTIVE STATE WITH REFINED THRESHOLDS
    ========================================================================== */
 function initScrollObserver() {
   const sections = document.querySelectorAll("section[id]");
@@ -339,16 +421,36 @@ function initScrollObserver() {
 
   if (!sections.length || !navLinks.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-        navLinks.forEach(link => {
-          link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          PortfolioState.activeSection = id;
+          navLinks.forEach(link => {
+            link.classList.toggle("active", link.getAttribute("href") === `#${id}`);
+          });
+        }
+      });
+    },
+    { threshold: [0.2, 0.5], rootMargin: "-100px 0px -50%" }
+  );
 
   sections.forEach(section => observer.observe(section));
+}
+
+/* ==========================================================================
+   7. RESPONSIVE BREAKPOINT OBSERVER FOR STATE SYNC
+   ========================================================================== */
+function attachResizeObserver() {
+  const resizeObserver = new ResizeObserver(() => {
+    const wasMobile = PortfolioState.isMobile;
+    PortfolioState.detectMobileBreakpoint();
+
+    if (wasMobile && !PortfolioState.isMobile && PortfolioState.mobileDrawerOpen) {
+      PortfolioState.setMobileDrawer(false);
+    }
+  });
+
+  resizeObserver.observe(document.documentElement);
 }
