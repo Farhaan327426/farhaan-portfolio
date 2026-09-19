@@ -164,6 +164,8 @@ const CaseStudySystem = {
   },
 
   init() {
+    if (this._initialized) return;
+    this._initialized = true;
     this.injectHTML();
     this.attachEventListeners();
     this.attachKeyboardShortcuts();
@@ -248,15 +250,17 @@ const CaseStudySystem = {
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".modal-trigger-btn, [data-case-study]");
       if (btn) {
+        e.preventDefault();
         const moduleId = btn.getAttribute("data-module") || btn.getAttribute("data-case-study");
         this.open(moduleId);
+        return;
+      }
+
+      if (e.target.closest("#caseStudyBack, .header-back")) {
+        e.preventDefault();
+        this.close();
       }
     });
-
-    const backBtn = document.getElementById("caseStudyBack");
-    if (backBtn) {
-      backBtn.addEventListener("click", () => this.close());
-    }
 
     this.initSlider();
     this.initGalleryControls();
@@ -679,7 +683,15 @@ class KalmanFilter {
   }
 }
 
-// Initialize on DOM ready
-document.addEventListener("DOMContentLoaded", () => {
+// Expose globally
+window.CaseStudySystem = CaseStudySystem;
+window.KalmanFilter = KalmanFilter;
+
+// Initialize on DOM ready or immediately if already loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    CaseStudySystem.init();
+  });
+} else {
   CaseStudySystem.init();
-});
+}
